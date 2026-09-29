@@ -1,0 +1,61 @@
+# avalonrpg.net — Apache configuration for the static site.
+# Keeps every URL of the old PHP site working (search engines, MobyGames, forum posts)
+# by sending it permanently to its new home.
+
+Options -MultiViews -Indexes
+ErrorDocument 404 /404.html
+DirectoryIndex index.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # One canonical host: www.avalonrpg.net. (HTTP→HTTPS is left to Cloudflare: behind its
+  # "Flexible SSL" the origin only ever sees plain HTTP, and forcing it here would loop.)
+  RewriteCond %{HTTP_HOST} ^avalonrpg\.net$ [NC]
+  RewriteRule ^ https://www.avalonrpg.net%{REQUEST_URI} [R=301,L,NE]
+
+  # Old pages → new pages (query strings like ?page=3 are dropped).
+  RewriteRule ^index\.php$              /                      [R=301,L,QSD]
+  RewriteRule ^avalon-story\.php$       /story/                [R=301,L,QSD]
+  RewriteRule ^avalon-characters\.php$  /characters/           [R=301,L,QSD]
+  RewriteRule ^avalon-music\.php$       /music/                [R=301,L,QSD]
+  RewriteRule ^avalon-screens\.php$     /media/#classic        [R=301,L,QSD,NE]
+  RewriteRule ^avalon-movie\.php$       /media/#classic        [R=301,L,QSD,NE]
+  RewriteRule ^avalon-download\.php$    /original/#download    [R=301,L,QSD,NE]
+  RewriteRule ^avalon-awards\.php$      /original/#awards      [R=301,L,QSD,NE]
+  RewriteRule ^avalon-reviews\.php$     /original/#reviews     [R=301,L,QSD,NE]
+  RewriteRule ^avalon-walkthrough\.php$ /original/#walkthrough [R=301,L,QSD,NE]
+  RewriteRule ^avalon-remake\.php$      /original/#remake      [R=301,L,QSD,NE]
+  RewriteRule ^avalon-links\.php$       /original/#links       [R=301,L,QSD,NE]
+  RewriteRule ^contact\.php$            /contact/              [R=301,L,QSD]
+
+  # Old file locations (downloads, MP3s, images) now live under /classic/.
+  RewriteRule ^(downloads|mp3|images)/(.*)$ /classic/$1/$2 [R=301,L]
+</IfModule>
+
+<IfModule mod_mime.c>
+  AddType image/webp .webp
+  AddType video/webm .webm
+  AddType font/woff2 .woff2
+  AddType application/manifest+json .webmanifest
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml
+</IfModule>
+
+<IfModule mod_headers.c>
+  # Vite fingerprints everything in /assets/, so it can be cached forever.
+  <If "%{REQUEST_URI} =~ m#^/assets/#">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </If>
+  # Game art, classic media: stable, cache for a month.
+  <If "%{REQUEST_URI} =~ m#^/(game|classic)/#">
+    Header set Cache-Control "public, max-age=2592000"
+  </If>
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>

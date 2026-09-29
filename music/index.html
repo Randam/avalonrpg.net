@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- @include head -->
+  <title>Music — Avalon</title>
+  <meta name="description" content="Listen to and download the complete Avalon soundtrack, composed in MiGTracker Pro, plus fan remixes and arrangements." />
+  <link rel="canonical" href="{{siteUrl}}/music/" />
+  <meta property="og:title" content="The music of Avalon" />
+  <meta property="og:description" content="The complete 1998 soundtrack, free to stream and download." />
+  <meta property="og:url" content="{{siteUrl}}/music/" />
+</head>
+<body data-page="music">
+  <!-- @include header -->
+  <main id="main">
+    <div class="container page-hero">
+      <h1>Music</h1>
+      <p class="lead">Avalon has a memorable soundtrack, composed with the home-made <a href="https://github.com/Randam/MiGTracker-Pro" rel="noopener">MiGTracker Pro</a>. Here is all of it, recorded with the best soundfont settings. Press a track to listen, or grab the MP3.</p>
+    </div>
+
+    <section class="section-tight">
+      <div class="container">
+        <div class="player" data-player>
+          <div class="panel-dialogue">
+            <div class="player-inner">
+              <img class="speech-portrait" src="/game/portraits/mace-smile.webp" width="256" height="256" alt="" style="width:64px;height:64px" />
+              <div class="player-now" aria-live="polite">
+                <strong data-now-title>Choose a track</strong>
+                <span data-now-sub>37 original tracks · 10 remixes</span>
+              </div>
+              <audio controls preload="none"></audio>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel-rune">
+          <!-- @render tracks -->
+          <p class="muted small" style="margin-top: 20px">Some of these songs were written for the game but did not make it into the final release; they're marked “not used”.</p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 48px">
+          <div class="panel-dialogue">
+            <h2 style="font-size: 24px">The Legacy Edition soundtrack</h2>
+            <p>The Legacy Edition plays these same compositions, and lets you choose in the options between the original sound and a new, enhanced version.</p>
+          </div>
+          <div class="panel-dialogue">
+            <h2 style="font-size: 24px">MoonSound edition</h2>
+            <p>The soundtrack also exists as a version for the MoonSound, the famous OPL4 sound cartridge for MSX computers.</p>
+            <p><a href="https://www.msx.org/downloads/avalon-rpg-ost-moonsound-edition" rel="noopener">Avalon OST, MoonSound edition on MSX.org</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <!-- @include footer -->
+</body>
+</html>

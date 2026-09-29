@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- @include head -->
+  <title>Screenshots &amp; video — Avalon: Legacy Edition</title>
+  <meta name="description" content="Trailer, gameplay footage and screenshots of Avalon: Legacy Edition, plus the original 1998 DOS game." />
+  <link rel="canonical" href="{{siteUrl}}/media/" />
+  <meta property="og:title" content="Avalon: screenshots &amp; video" />
+  <meta property="og:description" content="The trailer, gameplay and screenshots — then and now." />
+  <meta property="og:url" content="{{siteUrl}}/media/" />
+</head>
+<body data-page="media">
+  <!-- @include header -->
+  <main id="main">
+    <div class="container page-hero">
+      <h1>Screenshots &amp; video</h1>
+      <p class="lead">Avalon then and now: the Legacy Edition, and the 1998 original it grew from.</p>
+    </div>
+
+    <section class="section-tight">
+      <div class="container">
+        <div class="tabs" role="tablist" aria-label="Edition" data-hash>
+          <button type="button" class="plate tab" role="tab" id="tab-legacy" aria-controls="legacy" aria-selected="true">Legacy Edition</button>
+          <button type="button" class="plate tab" role="tab" id="tab-classic" aria-controls="classic" aria-selected="false">Original 1998</button>
+        </div>
+
+        <div class="tab-panel" id="legacy" role="tabpanel" aria-labelledby="tab-legacy" tabindex="0">
+          <div class="grid-2" style="align-items: start">
+            <div>
+              <h2 class="plaque">Trailer</h2>
+              <div class="panel-ornate">
+                <button type="button" class="yt frame-media" data-yt="{{trailerYouTubeId}}" aria-label="Play the Avalon: Legacy Edition trailer (loads YouTube)">
+                  <img src="/game/art/title-planet-1280.webp" alt="" width="1280" height="720" loading="lazy" />
+                  <span class="yt-play"><span class="yt-play-icon"></span><span class="yt-play-label">Play trailer</span></span>
+                </button>
+              </div>
+              <p class="yt-note">Pressing play loads the video from YouTube.</p>
+            </div>
+            <div>
+              <h2 class="plaque">Gameplay</h2>
+              <div class="panel-ornate">
+                <video class="frame-media" data-ambient autoplay muted loop playsinline preload="metadata" poster="/game/video/gameplay-poster.jpg" aria-label="Gameplay montage: the village, a forest battle, the beach, the alien village, the cave snake and the White Tower">
+                  <source src="/game/video/gameplay.webm" type="video/webm" />
+                  <source src="/game/video/gameplay.mp4" type="video/mp4" />
+                </video>
+              </div>
+            </div>
+          </div>
+          <h2 class="plaque" style="margin-top: 48px">Screenshots</h2>
+          <!-- @render gallery-legacy -->
+        </div>
+
+        <div class="tab-panel" id="classic" role="tabpanel" aria-labelledby="tab-classic" tabindex="0" hidden>
+          <div class="grid-2" style="align-items: center">
+            <div>
+              <h2 class="plaque">The 1998 movie</h2>
+              <div class="panel-dialogue">
+                <button type="button" class="yt frame-media" data-yt="{{originalMovieYouTubeId}}" aria-label="Play the original Avalon gameplay movie (loads YouTube)" style="aspect-ratio: 4 / 3">
+                  <img src="/classic/images/screens/village.png" alt="" width="320" height="200" loading="lazy" class="pixel" />
+                  <span class="yt-play"><span class="yt-play-icon"></span><span class="yt-play-label">Play movie</span></span>
+                </button>
+              </div>
+              <p class="yt-note">Pressing play loads the video from YouTube.</p>
+            </div>
+            <div>
+              <p class="lead">This is how Avalon looked in 1998: 320×200 pixels, 256 colours, written from scratch in Turbo Pascal.</p>
+              <p>Every screenshot below is from the original DOS release. Want to see it running? The original is still <a href="/original/#download">free to download</a>, and there's a copy hidden inside the Legacy Edition too.</p>
+            </div>
+          </div>
+          <h2 class="plaque" style="margin-top: 48px">Screenshots</h2>
+          <!-- @render gallery-classic -->
+        </div>
+      </div>
+    </section>
+  </main>
+  <!-- @include footer -->
+</body>
+</html>

@@ -1,0 +1,50 @@
+{
+  "siteUrl": "https://www.avalonrpg.net",
+  "googleAnalyticsId": "G-29KM22SPNW",
+  "email": "jeroen@derwort.nl",
+  "linkedin": "https://www.linkedin.com/in/jeroenderwort/",
+  "trailerYouTubeId": "fphtjxLk16Q",
+  "originalMovieYouTubeId": "sGbV7yBXOI8",
+  "address": {
+    "name": "Dutch Innovation Factory",
+    "url": "https://www.dutchinnovationfactory.com",
+    "street": "Bleiswijkseweg 37",
+    "city": "Zoetermeer",
+    "country": "The Netherlands"
+  },
+  "stores": [
+    {
+      "id": "steam",
+      "icon": "steam",
+      "store": "Steam",
+      "label": "Wishlist on Steam",
+      "platforms": "Windows · macOS · Linux",
+      "url": "https://store.steampowered.com/app/5238290/Avalon_Legacy_Edition/",
+      "primary": true
+    },
+    {
+      "id": "epic",
+      "icon": "epicgames",
+      "store": "Epic Games Store",
+      "label": "Free demo on Epic",
+      "platforms": "Epic Games Store",
+      "url": "https://store.epicgames.com/p/avalon-legacy-edition-avalon-legacy-edition-demo-ea918e"
+    },
+    {
+      "id": "googleplay",
+      "icon": "googleplay",
+      "store": "Google Play",
+      "label": "Google Play",
+      "platforms": "Android phones & tablets",
+      "url": null
+    },
+    {
+      "id": "appstore",
+      "icon": "appstore",
+      "store": "App Store",
+      "label": "App Store",
+      "platforms": "iPhone · iPad",
+      "url": null
+    }
+  ]
+}

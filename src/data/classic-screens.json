@@ -1,0 +1,178 @@
+[
+ {
+  "src": "/classic/images/screens/alien shop.png",
+  "caption": "The Alien Shop"
+ },
+ {
+  "src": "/classic/images/screens/alien village.png",
+  "caption": "Alien Village"
+ },
+ {
+  "src": "/classic/images/screens/battle.png",
+  "caption": "Battling in the Castle Gardens"
+ },
+ {
+  "src": "/classic/images/screens/battle2.png",
+  "caption": "Battling in the Castle"
+ },
+ {
+  "src": "/classic/images/screens/cave.png",
+  "caption": "The Cave"
+ },
+ {
+  "src": "/classic/images/screens/big boss.png",
+  "caption": "Big Boss Battle"
+ },
+ {
+  "src": "/classic/images/screens/castle entrance.png",
+  "caption": "The Castle Entrance"
+ },
+ {
+  "src": "/classic/images/screens/battle3.png",
+  "caption": "Battling in the White Tower"
+ },
+ {
+  "src": "/classic/images/screens/castle garden1.png",
+  "caption": "The Castle Garden 1"
+ },
+ {
+  "src": "/classic/images/screens/castle garden2.png",
+  "caption": "The Castle Garden 2"
+ },
+ {
+  "src": "/classic/images/screens/dungeon.png",
+  "caption": "The Dungeon"
+ },
+ {
+  "src": "/classic/images/screens/cellar.png",
+  "caption": "The Cellar"
+ },
+ {
+  "src": "/classic/images/screens/chicken.png",
+  "caption": "Chickens in the village"
+ },
+ {
+  "src": "/classic/images/screens/forest.png",
+  "caption": "The Forest"
+ },
+ {
+  "src": "/classic/images/screens/dark room.png",
+  "caption": "The Dark Room"
+ },
+ {
+  "src": "/classic/images/screens/chapter.png",
+  "caption": "Chapter Change"
+ },
+ {
+  "src": "/classic/images/screens/introdem_000.png",
+  "caption": "Introdemo 1"
+ },
+ {
+  "src": "/classic/images/screens/introdem_001.png",
+  "caption": "Introdemo 2"
+ },
+ {
+  "src": "/classic/images/screens/introdem_002.png",
+  "caption": "Introdemo 3"
+ },
+ {
+  "src": "/classic/images/screens/introdem_004.png",
+  "caption": "Introdemo 4"
+ },
+ {
+  "src": "/classic/images/screens/introdem_005.png",
+  "caption": "Introdemo 5"
+ },
+ {
+  "src": "/classic/images/screens/intro_piece.png",
+  "caption": "Introdemo 6"
+ },
+ {
+  "src": "/classic/images/screens/grey cave.png",
+  "caption": "The Gray Cave"
+ },
+ {
+  "src": "/classic/images/screens/house of caw.png",
+  "caption": "The House of Caw"
+ },
+ {
+  "src": "/classic/images/screens/item shop.png",
+  "caption": "The Item Shop"
+ },
+ {
+  "src": "/classic/images/screens/mace in boat.png",
+  "caption": "Mace sailing to the mountains"
+ },
+ {
+  "src": "/classic/images/screens/maces house.png",
+  "caption": "Mace's home"
+ },
+ {
+  "src": "/classic/images/screens/mountains.png",
+  "caption": "The Mountains"
+ },
+ {
+  "src": "/classic/images/screens/sea.png",
+  "caption": "The Sea 1"
+ },
+ {
+  "src": "/classic/images/screens/sea2.png",
+  "caption": "The Sea 2"
+ },
+ {
+  "src": "/classic/images/screens/secret cave.png",
+  "caption": "The Secret Cave"
+ },
+ {
+  "src": "/classic/images/screens/status.png",
+  "caption": "Status Screen"
+ },
+ {
+  "src": "/classic/images/screens/the beach.png",
+  "caption": "The Beach"
+ },
+ {
+  "src": "/classic/images/screens/village saved.png",
+  "caption": "The Village Saved"
+ },
+ {
+  "src": "/classic/images/screens/village.png",
+  "caption": "The Village"
+ },
+ {
+  "src": "/classic/images/screens/weapon shop.png",
+  "caption": "The Weapons Shop"
+ },
+ {
+  "src": "/classic/images/screens/white tower.png",
+  "caption": "The White Tower 1"
+ },
+ {
+  "src": "/classic/images/screens/white tower2.png",
+  "caption": "The White Tower 2"
+ },
+ {
+  "src": "/classic/images/screens/enddemo_000.png",
+  "caption": "End Demo 1"
+ },
+ {
+  "src": "/classic/images/screens/enddemo_001.png",
+  "caption": "End Demo 2"
+ },
+ {
+  "src": "/classic/images/screens/enddemo_003.png",
+  "caption": "End Demo 3"
+ },
+ {
+  "src": "/classic/images/screens/enddemo_004.png",
+  "caption": "End Demo 4"
+ },
+ {
+  "src": "/classic/images/screens/enddemo_005.png",
+  "caption": "End Demo 5"
+ },
+ {
+  "src": "/classic/images/screens/game over.png",
+  "caption": "Game Over"
+ }
+]

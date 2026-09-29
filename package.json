@@ -1,0 +1,17 @@
+{
+  "name": "avalonrpg-net",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "avalonrpg.net — the website for Avalon (1998) and Avalon: Legacy Edition",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "import-assets": "python3 scripts/import_game_assets.py"
+  },
+  "devDependencies": {
+    "simple-icons": "^13.21.0",
+    "vite": "^6.4.3"
+  }
+}

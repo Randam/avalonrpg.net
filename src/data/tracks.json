@@ -1,0 +1,278 @@
+{
+ "original": [
+  {
+   "no": 1,
+   "title": "Chapter Change",
+   "unused": false,
+   "file": "/classic/mp3/avalon/Avalon 01 - Chapter Change.mp3"
+  },
+  {
+   "no": 2,
+   "title": "The Village",
+   "unused": false,
+   "file": "/classic/mp3/avalon/Avalon 02 - The Village.mp3"
+  },
+  {
+   "no": 3,
+   "title": "Weapons Shop",
+   "unused": false,
+   "file": "/classic/mp3/avalon/Avalon 03 - Weapons Shop.mp3"
+  },
+  {
+   "no": 4,
+   "title": "Item Shop",
+   "unused": false,
+   "file": "/classic/mp3/avalon/Avalon 04 - Item Shop.mp3"
+  },
+  {
+   "no": 5,
+   "title": "The Forest",
+   "unused": false,
+   "file": "/classic/mp3/avalon/Avalon 05 - The Forest.mp3"
+  },
+  {
+   "no": 6,
+   "title": "Battle",
+   "unused": false,
+   "file": "/classic/mp3/avalon/Avalon 06 - Battle.mp3"
+  },
+  {
+   "no": 7,
+   "title": "Big Boss Battle",
+   "unused": false,
+   "file": "/classic/mp3/avalon/Avalon 07 - Big Boss.mp3"
+  },
+  {
+   "no": 8,
+   "title": "Kreznjerk",
+   "unused": false,
+   "file": "/classic/mp3/avalon/Avalon 08 - Kreznjerk.mp3"
+  },
+  {
+   "no": 9,
+   "title": "The Sea",
+   "unused": false,
+   "file": "/classic/mp3/avalon/Avalon 09 - The Sea.mp3"
+  },
+  {
+   "no": 10,
+   "title": "The Dark Room",
+   "unused": false,
+   "file": "/classic/mp3/avalon/Avalon 10 - The Dark Room.mp3"
+  },
+  {
+   "no": 11,
+   "title": "Castle Entrance",
+   "unused": false,
+   "file": "/classic/mp3/avalon/Avalon 11 - Castle Entrance.mp3"
+  },
+  {
+   "no": 12,
+   "title": "Main Door Opened",
+   "unused": false,
+   "file": "/classic/mp3/avalon/Avalon 12 - Success.mp3"
+  },
+  {
+   "no": 13,
+   "title": "Game Over",
+   "unused": false,
+   "file": "/classic/mp3/avalon/Avalon 13 - Game Over.mp3"
+  },
+  {
+   "no": 14,
+   "title": "The Castle",
+   "unused": false,
+   "file": "/classic/mp3/avalon/Avalon 14 - The Castle.mp3"
+  },
+  {
+   "no": 15,
+   "title": "The Cave",
+   "unused": false,
+   "file": "/classic/mp3/avalon/Avalon 15 - The Cave.mp3"
+  },
+  {
+   "no": 16,
+   "title": "Alien Village",
+   "unused": false,
+   "file": "/classic/mp3/avalon/Avalon 16 - Alien Village.mp3"
+  },
+  {
+   "no": 17,
+   "title": "Untitled",
+   "unused": true,
+   "file": "/classic/mp3/avalon/Avalon 17.mp3"
+  },
+  {
+   "no": 18,
+   "title": "The Cellar",
+   "unused": false,
+   "file": "/classic/mp3/avalon/Avalon 18 - The Cellar.mp3"
+  },
+  {
+   "no": 19,
+   "title": "Untitled",
+   "unused": true,
+   "file": "/classic/mp3/avalon/Avalon 19.mp3"
+  },
+  {
+   "no": 20,
+   "title": "Castle Garden",
+   "unused": false,
+   "file": "/classic/mp3/avalon/Avalon 20 - Castle Garden.mp3"
+  },
+  {
+   "no": 21,
+   "title": "Empty Village",
+   "unused": false,
+   "file": "/classic/mp3/avalon/Avalon 21 - Empty Village.mp3"
+  },
+  {
+   "no": 22,
+   "title": "Untitled",
+   "unused": true,
+   "file": "/classic/mp3/avalon/Avalon 22.mp3"
+  },
+  {
+   "no": 23,
+   "title": "The Mountains",
+   "unused": false,
+   "file": "/classic/mp3/avalon/Avalon 23 - The Mountains.mp3"
+  },
+  {
+   "no": 24,
+   "title": "The Beach",
+   "unused": false,
+   "file": "/classic/mp3/avalon/Avalon 24 - The Beach.mp3"
+  },
+  {
+   "no": 25,
+   "title": "The Dungeon",
+   "unused": false,
+   "file": "/classic/mp3/avalon/Avalon 25 - The Dungeon.mp3"
+  },
+  {
+   "no": 26,
+   "title": "Intro Demo",
+   "unused": false,
+   "file": "/classic/mp3/avalon/Avalon 26 - Intro Demo.mp3"
+  },
+  {
+   "no": 27,
+   "title": "Untitled",
+   "unused": true,
+   "file": "/classic/mp3/avalon/Avalon 27.mp3"
+  },
+  {
+   "no": 28,
+   "title": "The Gray Cave",
+   "unused": false,
+   "file": "/classic/mp3/avalon/Avalon 28 - The Gray Cave.mp3"
+  },
+  {
+   "no": 29,
+   "title": "Untitled",
+   "unused": true,
+   "file": "/classic/mp3/avalon/Avalon 29.mp3"
+  },
+  {
+   "no": 30,
+   "title": "Untitled",
+   "unused": true,
+   "file": "/classic/mp3/avalon/Avalon 30.mp3"
+  },
+  {
+   "no": 31,
+   "title": "The White Tower",
+   "unused": false,
+   "file": "/classic/mp3/avalon/Avalon 31 - The White Tower.mp3"
+  },
+  {
+   "no": 32,
+   "title": "Avalon is Saved",
+   "unused": false,
+   "file": "/classic/mp3/avalon/Avalon 32 - Avalon is Saved.mp3"
+  },
+  {
+   "no": 33,
+   "title": "Village Saved",
+   "unused": false,
+   "file": "/classic/mp3/avalon/Avalon 33 - Village Saved.mp3"
+  },
+  {
+   "no": 34,
+   "title": "End Credits",
+   "unused": false,
+   "file": "/classic/mp3/avalon/Avalon 34 - End Credits.mp3"
+  },
+  {
+   "no": 35,
+   "title": "Avalon Title (Voice)",
+   "unused": false,
+   "file": "/classic/mp3/avalon/Avalon 35 - Title (Voice).mp3"
+  },
+  {
+   "no": 36,
+   "title": "The Dark Lord",
+   "unused": false,
+   "file": "/classic/mp3/avalon/Avalon 36 - The Dark Lord.mp3"
+  },
+  {
+   "no": 37,
+   "title": "End Demo",
+   "unused": false,
+   "file": "/classic/mp3/avalon/Avalon 37 - End Demo.mp3"
+  }
+ ],
+ "remixes": [
+  {
+   "title": "Castle Garden",
+   "file": "/classic/mp3/remixed/Castle Garden.mp3",
+   "by": "Huepow00"
+  },
+  {
+   "title": "Intro Demo",
+   "file": "/classic/mp3/remixed/Intro Demo.mp3",
+   "by": "Huepow00"
+  },
+  {
+   "title": "Kerzenjerk",
+   "file": "/classic/mp3/remixed/Kerzenjerk.mp3",
+   "by": "Huepow00"
+  },
+  {
+   "title": "The Beach",
+   "file": "/classic/mp3/remixed/The Beach.mp3",
+   "by": "Huepow00"
+  },
+  {
+   "title": "The Castle",
+   "file": "/classic/mp3/remixed/The Castle.mp3",
+   "by": "Huepow00"
+  },
+  {
+   "title": "The Sea",
+   "file": "/classic/mp3/remixed/The Sea.mp3",
+   "by": "filipmusic"
+  },
+  {
+   "title": "The Dark Room",
+   "file": "/classic/mp3/remixed/The Dark Room.mp3",
+   "by": "filipmusic"
+  },
+  {
+   "title": "Big Boss",
+   "file": "/classic/mp3/remixed/Big Boss.mp3",
+   "by": "filipmusic"
+  },
+  {
+   "title": "Village Saved",
+   "file": "/classic/mp3/remixed/Village Saved.mp3",
+   "by": "filipmusic"
+  },
+  {
+   "title": "Intro Demo (orchestral)",
+   "file": "/classic/mp3/remixed/Intro Demo (orchestral).mp3",
+   "by": "filipmusic"
+  }
+ ]
+}

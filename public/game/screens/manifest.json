@@ -1,0 +1,122 @@
+[
+ {
+  "id": "village",
+  "caption": "The village where the last of humanity settled",
+  "w": 1600,
+  "h": 900
+ },
+ {
+  "id": "battle-slime",
+  "caption": "Turn-based battles: a Green Slime in the forest",
+  "w": 1600,
+  "h": 900
+ },
+ {
+  "id": "fleur",
+  "caption": "Fleur has lost something in the woods",
+  "w": 1600,
+  "h": 900
+ },
+ {
+  "id": "forest",
+  "caption": "The forest north of the village",
+  "w": 1600,
+  "h": 900
+ },
+ {
+  "id": "cave",
+  "caption": "Something waits in the dark of the cave",
+  "w": 1600,
+  "h": 900
+ },
+ {
+  "id": "battle-snake",
+  "caption": "The snake of the cave",
+  "w": 1600,
+  "h": 900
+ },
+ {
+  "id": "beach",
+  "caption": "Meeting Kreznjerk on the beach",
+  "w": 1600,
+  "h": 900
+ },
+ {
+  "id": "alien-village",
+  "caption": "The village of the Syuglooc",
+  "w": 1600,
+  "h": 900
+ },
+ {
+  "id": "castle-entrance",
+  "caption": "The gate of the Dark Castle",
+  "w": 1600,
+  "h": 900
+ },
+ {
+  "id": "dungeon",
+  "caption": "The castle dungeon",
+  "w": 1600,
+  "h": 900
+ },
+ {
+  "id": "garden",
+  "caption": "The castle garden. Mind the trees",
+  "w": 1600,
+  "h": 900
+ },
+ {
+  "id": "mace-home",
+  "caption": "Mace's home. That old computer looks familiar…",
+  "w": 1600,
+  "h": 900
+ },
+ {
+  "id": "mountains",
+  "caption": "Sailing to the mountains",
+  "w": 1600,
+  "h": 900
+ },
+ {
+  "id": "climb",
+  "caption": "Climbing the snowy peaks",
+  "w": 1600,
+  "h": 900
+ },
+ {
+  "id": "battle-rattlesnake",
+  "caption": "The Rattlesnake of the mountains",
+  "w": 1600,
+  "h": 900
+ },
+ {
+  "id": "white-tower",
+  "caption": "The White Tower",
+  "w": 1600,
+  "h": 900
+ },
+ {
+  "id": "shop",
+  "caption": "Alfa's general store",
+  "w": 1600,
+  "h": 900
+ },
+ {
+  "id": "inventory",
+  "caption": "Your bag: objects and battle items",
+  "w": 1600,
+  "h": 900
+ },
+ {
+  "id": "intro",
+  "caption": "The intro, redrawn",
+  "w": 1600,
+  "h": 900
+ },
+ {
+  "id": "intro-eye",
+  "caption": "But appearances can be deceiving…",
+  "w": 1600,
+  "h": 900
+ }
+]
