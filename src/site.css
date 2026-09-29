@@ -1063,3 +1063,10 @@ address { font-style: normal; }
 .guide-enemies tr:not(:first-child) td:nth-child(2)::first-line { font-weight: 700; color: var(--gold-bright); }
 .prose h2 { font-size: 24px; color: var(--gold-bright); margin: 1.8em 0 0.6em; }
 .prose h2:first-child { margin-top: 0.2em; }
+
+/* Music: the full-soundtrack call to action. */
+.soundtrack-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 18px 32px; padding: 14px 18px 8px; }
+.soundtrack-cta > div { flex: 1 1 360px; }
+.soundtrack-cta h2 { color: var(--gold-bright); margin-bottom: 0.3em; }
+.soundtrack-btn { min-height: 62px; padding-inline: 8px; }
+.soundtrack-btn .icon { width: 28px; height: 28px; }

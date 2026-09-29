@@ -60,20 +60,21 @@ const renderers = {
       + `<span class="cast-name">${esc(c.name)}</span></a></li>`).join('')}</ul>`;
   },
 
-  /** The original soundtrack and the fan remixes, each a playable, downloadable track. */
+  /** A selection of the original soundtrack plus the fan remixes, each playable and downloadable. */
   tracks: (root) => {
     const { original, remixes } = json(root, 'src/data/tracks.json');
     const row = (t, no, sub) => `<li class="track-row"><button type="button" class="track" data-src="${esc(encodeURI(t.file))}" `
       + `data-title="${esc(t.title)}" data-sub="${esc(sub)}"><span class="track-no">${no}</span>`
       + `<span>${esc(t.title)}${t.unused ? ' <span class="track-note">(not used in the game)</span>' : ''}</span></button>`
       + `<a class="track-dl" href="${esc(encodeURI(t.file))}" download aria-label="Download ${esc(t.title)} (MP3)">MP3</a></li>`;
-    const orig = original.map((t) => row(t, String(t.no).padStart(2, '0'),
+    // Only a selection of the original soundtrack is shared here; the full album is sold on Steam.
+    const orig = original.filter((t) => t.shared).map((t) => row(t, String(t.no).padStart(2, '0'),
       `Original soundtrack · track ${t.no}`)).join('');
     const byArtist = {};
     remixes.forEach((t) => (byArtist[t.by] ||= []).push(t));
     const rem = Object.entries(byArtist).map(([by, list]) => `<h3>${by === 'filipmusic' ? 'Arrangements' : 'Remixes'} by ${esc(by)}</h3>`
       + `<ol class="tracklist">${list.map((t, i) => row(t, '♪', `${by === 'filipmusic' ? 'Arranged' : 'Remixed'} by ${by}`)).join('')}</ol>`).join('');
-    return `<section aria-labelledby="ost"><h2 class="plaque" id="ost">Original soundtrack</h2><ol class="tracklist">${orig}</ol></section>`
+    return `<section aria-labelledby="ost"><h2 class="plaque" id="ost">From the original soundtrack</h2><ol class="tracklist">${orig}</ol></section>`
       + `<section class="section-tight" aria-labelledby="remixes"><h2 class="plaque" id="remixes">Remixes &amp; arrangements</h2>${rem}</section>`;
   },
 };

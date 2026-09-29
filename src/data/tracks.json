@@ -10,7 +10,8 @@
    "no": 2,
    "title": "The Village",
    "unused": false,
-   "file": "/classic/mp3/avalon/Avalon 02 - The Village.mp3"
+   "file": "/classic/mp3/avalon/Avalon 02 - The Village.mp3",
+   "shared": true
   },
   {
    "no": 3,
@@ -28,31 +29,36 @@
    "no": 5,
    "title": "The Forest",
    "unused": false,
-   "file": "/classic/mp3/avalon/Avalon 05 - The Forest.mp3"
+   "file": "/classic/mp3/avalon/Avalon 05 - The Forest.mp3",
+   "shared": true
   },
   {
    "no": 6,
    "title": "Battle",
    "unused": false,
-   "file": "/classic/mp3/avalon/Avalon 06 - Battle.mp3"
+   "file": "/classic/mp3/avalon/Avalon 06 - Battle.mp3",
+   "shared": true
   },
   {
    "no": 7,
    "title": "Big Boss Battle",
    "unused": false,
-   "file": "/classic/mp3/avalon/Avalon 07 - Big Boss.mp3"
+   "file": "/classic/mp3/avalon/Avalon 07 - Big Boss.mp3",
+   "shared": true
   },
   {
    "no": 8,
    "title": "Kreznjerk",
    "unused": false,
-   "file": "/classic/mp3/avalon/Avalon 08 - Kreznjerk.mp3"
+   "file": "/classic/mp3/avalon/Avalon 08 - Kreznjerk.mp3",
+   "shared": true
   },
   {
    "no": 9,
    "title": "The Sea",
    "unused": false,
-   "file": "/classic/mp3/avalon/Avalon 09 - The Sea.mp3"
+   "file": "/classic/mp3/avalon/Avalon 09 - The Sea.mp3",
+   "shared": true
   },
   {
    "no": 10,
@@ -82,19 +88,22 @@
    "no": 14,
    "title": "The Castle",
    "unused": false,
-   "file": "/classic/mp3/avalon/Avalon 14 - The Castle.mp3"
+   "file": "/classic/mp3/avalon/Avalon 14 - The Castle.mp3",
+   "shared": true
   },
   {
    "no": 15,
    "title": "The Cave",
    "unused": false,
-   "file": "/classic/mp3/avalon/Avalon 15 - The Cave.mp3"
+   "file": "/classic/mp3/avalon/Avalon 15 - The Cave.mp3",
+   "shared": true
   },
   {
    "no": 16,
    "title": "Alien Village",
    "unused": false,
-   "file": "/classic/mp3/avalon/Avalon 16 - Alien Village.mp3"
+   "file": "/classic/mp3/avalon/Avalon 16 - Alien Village.mp3",
+   "shared": true
   },
   {
    "no": 17,
@@ -154,7 +163,8 @@
    "no": 26,
    "title": "Intro Demo",
    "unused": false,
-   "file": "/classic/mp3/avalon/Avalon 26 - Intro Demo.mp3"
+   "file": "/classic/mp3/avalon/Avalon 26 - Intro Demo.mp3",
+   "shared": true
   },
   {
    "no": 27,

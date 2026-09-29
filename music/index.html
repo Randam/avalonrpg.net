@@ -14,7 +14,7 @@
   <main id="main">
     <div class="container page-hero">
       <h1>Music</h1>
-      <p class="lead">Avalon has a memorable soundtrack, composed with the home-made <a href="https://github.com/Randam/MiGTracker-Pro" rel="noopener">MiGTracker Pro</a>. Here is all of it, recorded with the best soundfont settings. Press a track to listen, or grab the MP3.</p>
+      <p class="lead">Avalon has a memorable soundtrack, composed with the home-made <a href="https://github.com/Randam/MiGTracker-Pro" rel="noopener">MiGTracker Pro</a>. Here are ten favourites from the original, recorded with the best soundfont settings. Press a track to listen, or grab the MP3.</p>
     </div>
 
     <section class="section-tight">
@@ -25,16 +25,25 @@
               <img class="speech-portrait" src="/game/portraits/mace-smile.webp" width="256" height="256" alt="" style="width:64px;height:64px" />
               <div class="player-now" aria-live="polite">
                 <strong data-now-title>Choose a track</strong>
-                <span data-now-sub>37 original tracks · 10 remixes</span>
+                <span data-now-sub>10 original tracks · 10 remixes</span>
               </div>
               <audio controls preload="none"></audio>
             </div>
           </div>
         </div>
 
-        <div class="panel-rune">
+        <div class="panel-ornate has-crown soundtrack-cta">
+          <img class="panel-crown" src="/game/ui/ornate-crown.png" alt="" width="220" height="52" />
+          <div>
+            <h2>The complete soundtrack</h2>
+            <p>All {{soundtrack.tracks}} tracks on two discs: the 37 original compositions from 1998, including the songs that never made it into the game, and 34 enhanced versions made for the Legacy Edition. Composed by Jeroen and Bowie Derwort.</p>
+          </div>
+          <!-- @soundtrack -->
+        </div>
+
+        <div class="panel-rune" style="margin-top: 40px">
           <!-- @render tracks -->
-          <p class="muted small" style="margin-top: 20px">Some of these songs were written for the game but did not make it into the final release; they're marked “not used”.</p>
+          <p class="muted small" style="margin-top: 20px">Want the rest? The complete soundtrack, with every original track and the enhanced versions, is on Steam.</p>
         </div>
 
         <div class="grid-2" style="margin-top: 48px">

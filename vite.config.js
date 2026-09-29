@@ -40,6 +40,15 @@ function stores(variant, cfg) {
   return `<ul class="store-list store-list-${variant}" aria-label="Where to get Avalon: Legacy Edition">${items.join('')}</ul>`;
 }
 
+/** Call to action for the full soundtrack: Steam's soundtrack page once it has one, else the game's. */
+function soundtrack(cfg) {
+  const s = cfg.soundtrack;
+  const live = Boolean(s.url);
+  return `<a class="plate plate-primary soundtrack-btn" href="${live ? s.url : s.gameUrl}" target="_blank" rel="noopener" data-store="steam-soundtrack">`
+    + `${icon('steam')}<span class="store-btn-text"><span class="store-btn-label">${live ? 'Buy the soundtrack on Steam' : 'The soundtrack is coming to Steam'}</span>`
+    + `<span class="store-btn-sub">${live ? `All ${s.tracks} tracks` : 'Wishlist Avalon: Legacy Edition'}</span></span></a>`;
+}
+
 function lookup(obj, path) {
   return path.split('.').reduce((o, k) => (o == null ? undefined : o[k]), obj);
 }
@@ -56,6 +65,7 @@ function siteTemplate() {
           (_, name) => readFileSync(resolve(root, 'src/partials', `${name}.html`), 'utf8'));
         let out = include(include(html));
         out = out.replace(/<!--\s*@render\s+([\w-]+)\s*-->/g, (_, name) => render(name, root));
+        out = out.replace(/<!--\s*@soundtrack\s*-->/g, () => soundtrack(cfg));
         out = out.replace(/<!--\s*@stores\s*([\w-]*)\s*-->/g, (_, v) => stores(v || 'full', cfg));
         out = out.replace(/\{\{\s*icon:([\w-]+)\s*\}\}/g, (_, n) => icon(n));
         out = out.replace(/\{\{\s*([\w.]+)\s*\}\}/g, (m, key) => {

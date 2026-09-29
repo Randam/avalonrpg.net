@@ -46,5 +46,10 @@
       "platforms": "iPhone · iPad",
       "url": null
     }
-  ]
+  ],
+  "soundtrack": {
+    "url": null,
+    "gameUrl": "https://store.steampowered.com/app/5238290/Avalon_Legacy_Edition/",
+    "tracks": 71
+  }
 }
