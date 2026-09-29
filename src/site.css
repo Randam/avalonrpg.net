@@ -1061,3 +1061,5 @@ address { font-style: normal; }
 .guide-more:hover strong { text-decoration: underline; }
 /* The first line of each stats cell is the monster's name. */
 .guide-enemies tr:not(:first-child) td:nth-child(2)::first-line { font-weight: 700; color: var(--gold-bright); }
+.prose h2 { font-size: 24px; color: var(--gold-bright); margin: 1.8em 0 0.6em; }
+.prose h2:first-child { margin-top: 0.2em; }
