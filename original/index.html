@@ -27,7 +27,7 @@
           <button type="button" class="plate tab" role="tab" id="tab-download" aria-controls="download" aria-selected="false">Download</button>
           <button type="button" class="plate tab" role="tab" id="tab-awards" aria-controls="awards" aria-selected="false">Awards</button>
           <button type="button" class="plate tab" role="tab" id="tab-reviews" aria-controls="reviews" aria-selected="false">Reviews</button>
-          <button type="button" class="plate tab" role="tab" id="tab-walkthrough" aria-controls="walkthrough" aria-selected="false">Walkthrough</button>
+          <button type="button" class="plate tab" role="tab" id="tab-guide" aria-controls="guide" aria-selected="false">Guide</button>
           <button type="button" class="plate tab" role="tab" id="tab-links" aria-controls="links" aria-selected="false">Links</button>
         </div>
 
@@ -197,14 +197,15 @@
           </div>
         </div>
 
-        <!-- Walkthrough -->
-        <div class="tab-panel" id="walkthrough" role="tabpanel" aria-labelledby="tab-walkthrough" tabindex="0" hidden>
+        <!-- Guide (the old #walkthrough links land here too) -->
+        <div class="tab-panel" id="guide" role="tabpanel" aria-labelledby="tab-guide" tabindex="0" hidden>
+          <span id="walkthrough"></span>
           <div class="panel-dialogue">
             <div class="speech">
               <img class="speech-portrait" src="/game/portraits/john.webp" width="256" height="256" alt="" />
               <div>
                 <span class="speech-name">John</span>
-                <p>Before you open the walkthrough, think carefully. Do you really need it? A true RPG adventurer should be able to finish a game like this without a guidebook.</p>
+                <p>Before you open the guide, think carefully. Do you really need it? A true RPG adventurer should be able to finish a game like this without a guidebook.</p>
                 <p>…But alright, if you insist.</p>
               </div>
             </div>
@@ -213,7 +214,8 @@
             <h2>The complete Avalon guide</h2>
             <p>The full walkthrough for the original Avalon, chapter by chapter, plus maps and area scans, every weapon, defense, item and object, all enemies with their stats, cheats, savegames and downloads.</p>
             <div class="btn-row">
-              <a class="plate plate-primary" href="/original/guide/#walkthrough">Read the walkthrough</a>
+              <a class="plate plate-primary" href="/original/guide/">Open the guide</a>
+              <a class="plate" href="/original/guide/#walkthrough">Walkthrough</a>
               <a class="plate" href="/original/guide/#maps">Maps</a>
               <a class="plate" href="/original/guide/#enemies">Enemies</a>
               <a class="plate" href="/original/guide/#cheats">Cheats</a>
