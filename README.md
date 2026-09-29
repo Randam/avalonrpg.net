@@ -60,7 +60,7 @@ presents dialogue.
   rebuilt from `Sfont/` in the original game's repository, since its old host is gone.
 - **`src/data/`**: characters, tracklist and 1998 screenshot captions, rendered to static HTML
   at build time by `src/render.js` (`<!-- @render name -->` in a page).
-- **`site.config.json`**: store links, trailer id, analytics id, contact details. A store with
+- **`site.config.json`**: store links, trailer id, analytics id, contact details. `soundtrack` holds the Steam OST link; set `"released": true` when it goes on sale and the music page's button changes from "coming to Steam" to "Buy the soundtrack on Steam". A store with
   `"url": null` shows as "Coming soon". When Google Play or the App Store go live, fill in the URL.
 
 ## Pages

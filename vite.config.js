@@ -40,13 +40,12 @@ function stores(variant, cfg) {
   return `<ul class="store-list store-list-${variant}" aria-label="Where to get Avalon: Legacy Edition">${items.join('')}</ul>`;
 }
 
-/** Call to action for the full soundtrack: Steam's soundtrack page once it has one, else the game's. */
+/** Call to action for the full soundtrack on Steam; says "coming" until `released` is set. */
 function soundtrack(cfg) {
   const s = cfg.soundtrack;
-  const live = Boolean(s.url);
-  return `<a class="plate plate-primary soundtrack-btn" href="${live ? s.url : s.gameUrl}" target="_blank" rel="noopener" data-store="steam-soundtrack">`
-    + `${icon('steam')}<span class="store-btn-text"><span class="store-btn-label">${live ? 'Buy the soundtrack on Steam' : 'The soundtrack is coming to Steam'}</span>`
-    + `<span class="store-btn-sub">${live ? `All ${s.tracks} tracks` : 'Wishlist Avalon: Legacy Edition'}</span></span></a>`;
+  return `<a class="plate plate-primary soundtrack-btn" href="${s.url}" target="_blank" rel="noopener" data-store="steam-soundtrack">`
+    + `${icon('steam')}<span class="store-btn-text"><span class="store-btn-label">${s.released ? 'Buy the soundtrack on Steam' : 'The soundtrack is coming to Steam'}</span>`
+    + `<span class="store-btn-sub">${s.released ? `All ${s.tracks} tracks` : 'Avalon: Legacy Edition OST'}</span></span></a>`;
 }
 
 function lookup(obj, path) {
