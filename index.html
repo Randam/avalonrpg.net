@@ -8,7 +8,8 @@
   <meta property="og:title" content="Avalon: Legacy Edition" />
   <meta property="og:description" content="The award-winning 1998 DOS RPG, reborn for modern systems by its original creators." />
   <meta property="og:url" content="{{siteUrl}}/" />
-  <link rel="preload" as="image" href="/game/art/poster-720.webp" imagesrcset="/game/art/poster-480.webp 480w, /game/art/poster-720.webp 720w, /game/art/poster-1086.webp 1086w" imagesizes="(max-width: 820px) calc(100vw - 32px), 40vw" />
+  <link rel="preload" as="image" imagesrcset="/game/art/keyart-800.webp 800w, /game/art/keyart-1280.webp 1280w, /game/art/keyart-1930.webp 1930w" imagesizes="100vw" media="(min-width: 701px)" />
+  <link rel="preload" as="image" imagesrcset="/game/art/poster-480.webp 480w, /game/art/poster-720.webp 720w, /game/art/poster-1086.webp 1086w" imagesizes="100vw" media="(max-width: 700px)" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -29,24 +30,23 @@
 
   <main id="main">
     <section class="hero" aria-labelledby="hero-title">
-      <div class="container hero-grid">
-        <div class="hero-poster panel-ornate">
-          <img src="/game/art/poster-1086.webp"
-               srcset="/game/art/poster-480.webp 480w, /game/art/poster-720.webp 720w, /game/art/poster-1086.webp 1086w"
-               sizes="(max-width: 820px) calc(100vw - 32px), 40vw" width="1086" height="1448" fetchpriority="high"
-               alt="Avalon: Legacy Edition box art — Fleur, Mace and Caddman under a night sky, above the village and the alien village joined by a bridge where Mace stands." />
-        </div>
-        <div class="hero-cta" id="get-the-game">
-          <div class="panel-ornate has-crown center">
-            <img class="panel-crown" src="/game/ui/ornate-crown.png" alt="" width="220" height="52" />
-            <span class="eyebrow">The 1998 DOS RPG, reborn</span>
-            <h1 id="hero-title">Avalon: Legacy Edition</h1>
-            <p class="lead">Explore the distant world of Avalon, battle dangerous creatures and uncover its secrets in a faithful recreation of the award-winning 1998 RPG, by its original creators.</p>
-            <!-- @stores -->
-            <div class="btn-row">
-              <a class="plate" href="#trailer" data-play-trailer="trailer">{{icon:youtube}}<span>Watch the trailer</span></a>
-              <a class="plate" href="/original/#download"><span>Play the 1998 original, free</span></a>
-            </div>
+      <picture>
+        <source media="(max-width: 700px)" srcset="/game/art/poster-480.webp 480w, /game/art/poster-720.webp 720w, /game/art/poster-1086.webp 1086w" sizes="100vw" width="1086" height="1448" />
+        <img class="hero-art" src="/game/art/keyart-1930.webp"
+             srcset="/game/art/keyart-800.webp 800w, /game/art/keyart-1280.webp 1280w, /game/art/keyart-1930.webp 1930w"
+             sizes="100vw" width="1930" height="1086" fetchpriority="high"
+             alt="Avalon: Legacy Edition key art — Fleur, Mace and Caddman under a night sky, above the village and the alien village joined by a bridge where Mace stands." />
+      </picture>
+      <div class="container hero-cta" id="get-the-game">
+        <div class="panel-ornate has-crown center">
+          <img class="panel-crown" src="/game/ui/ornate-crown.png" alt="" width="220" height="52" />
+          <span class="eyebrow">The 1998 DOS RPG, reborn</span>
+          <h1 id="hero-title">Avalon: Legacy Edition</h1>
+          <p class="lead">Explore the distant world of Avalon, battle dangerous creatures and uncover its secrets in a faithful recreation of the award-winning 1998 RPG, by its original creators.</p>
+          <!-- @stores -->
+          <div class="btn-row">
+            <a class="plate" href="#trailer" data-play-trailer="trailer">{{icon:youtube}}<span>Watch the trailer</span></a>
+            <a class="plate" href="/original/#download"><span>Play the 1998 original, free</span></a>
           </div>
         </div>
       </div>

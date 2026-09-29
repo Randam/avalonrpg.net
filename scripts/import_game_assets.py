@@ -78,12 +78,16 @@ ITEM_ICONS = ["relic_disc", "swiss_watch", "map", "translator", "golden_key",
               "pick_axe", "torch", "necklace", "first_aid_kit", "master_key"]
 
 # The approved key art: the "movie poster" box art, v2. It only exists in portrait, and is shown
-# as-is — never cropped or recomposed; wide spaces get it framed on a blurred copy of itself.
+# as-is — never cropped; wide spaces use the landscape adaptation below.
 POSTER = ART / "box-art/movie-poster-v2/box-art_v2.jpg"
+# Its landscape adaptation, built from the same PSD's layers by make_landscape_keyart.py (kept in
+# this repo, since it is the site's derivative, not a game asset).
+LANDSCAPE = SITE / "art/keyart-landscape.png"
 
 # Painted art: (source, output stem, widths). The first width is the default src.
 PAINTED = [
     (POSTER, "art/poster", [1086, 720, 480]),
+    (LANDSCAPE, "art/keyart", [1930, 1280, 800]),
     (ART / "steam-capsules/background-v1/avalon-background-1438x810.png", "art/backdrop", [1438]),
     (ASSETS / "logos/title.png", "art/title-planet", [1280]),
 ]
@@ -152,16 +156,6 @@ def webp(src, rel, width=None, lossless=False, quality=82):
     return Image.open(out).size
 
 
-def blurred_backdrop(img, w, h):
-    """Cover-crop `img` to w×h, blur it heavily and darken it: a calm field in the art's own colours."""
-    from PIL import ImageEnhance, ImageFilter
-    scale = max(w / img.width, h / img.height)
-    big = img.resize((round(img.width * scale), round(img.height * scale)), Image.LANCZOS)
-    left, top = (big.width - w) // 2, (big.height - h) // 3
-    field = big.crop((left, top, left + w, top + h)).filter(ImageFilter.GaussianBlur(max(w, h) / 40))
-    return ImageEnhance.Brightness(field).enhance(0.55)
-
-
 def import_ui():
     for src, rel in UI_FILES.items():
         shutil.copyfile(ASSETS / src, dest(rel))
@@ -182,18 +176,13 @@ def import_painted():
     icon = Image.open(ART / "epic-store/v3/avalon-icon-512x512.png").convert("RGBA")
     for size, name in [(32, "favicon-32.png"), (180, "apple-touch-icon.png"), (512, "icon-512.png")]:
         icon.resize((size, size), Image.LANCZOS).save(dest(f"icons/{name}"))
-    # The poster's blurred backdrop (behind the hero) and the social preview card (the whole
-    # poster centred on that backdrop). Both keep the poster itself untouched.
-    poster = Image.open(POSTER).convert("RGB")
-    backdrop = blurred_backdrop(poster, 1920, 1080)
-    backdrop.save(dest("art/poster-backdrop.tmp.png"))
-    webp(dest("art/poster-backdrop.tmp.png"), "art/poster-backdrop-1920.webp", quality=70)  # deletes the tmp
-    card = blurred_backdrop(poster, 1200, 630)
-    inner = poster.resize((round(poster.width * 600 / poster.height), 600), Image.LANCZOS)
-    card.paste(inner, ((1200 - inner.width) // 2, 15))
-    card.save(dest("art/og-card.jpg"), quality=86, optimize=True)
+    # Social preview card: the landscape key art, 1200×630 (1.905:1, a thin trim off the bottom sea).
+    land = Image.open(LANDSCAPE).convert("RGB").resize((1200, 675), Image.LANCZOS)
+    land.crop((0, 0, 1200, 630)).save(dest("art/og-card.jpg"), quality=86, optimize=True)
     # Press kit: the approved poster at full size, and the transparent character layer.
     shutil.copyfile(POSTER, dest("press/avalon-legacy-edition-key-art.jpg"))
+    Image.open(LANDSCAPE).convert("RGB").save(dest("press/avalon-legacy-edition-key-art-landscape.jpg"),
+                                              quality=92, optimize=True)
     shutil.copyfile(POSTER.parent / "box-art-characters-trans.png", dest("press/avalon-characters-transparent.png"))
 
 
