@@ -69,18 +69,20 @@ presents dialogue.
 (about, makers, download, awards, reviews, walkthrough, links, each linkable by
 `#hash`) · `/original/guide/` (the 1998 guide, one tab per section, e.g. `#enemies`, `#map-cave`) · `/contact/` · `/privacy/` · `404.html`
 
-## Deploying to the current host
+## Deploying
 
-Upload the **contents** of `dist/` to the web root, including the hidden `.htaccess`. It:
+**GitHub Pages** (current): `.github/workflows/deploy.yml` builds the site and publishes `dist/`
+on every push to `main`. Pages' source must be set to **GitHub Actions** (serving the branch
+directly would publish the unbuilt templates). `public/CNAME` carries the custom domain,
+`www.avalonrpg.net`. GitHub Pages can't send redirects, so the old site's URLs
+(`avalon-download.php`, …, and the old `/downloads/`, `/mp3/`, `/images/` files) are forwarded
+by a small script at the top of `404.html`.
 
-- 301-redirects every old URL (`avalon-download.php`, `avalon-screens.php`, …, and the old
-  `/downloads/`, `/mp3/`, `/images/` file paths) to its new place;
-- sends `avalonrpg.net` to `www.avalonrpg.net` (HTTP→HTTPS is left to Cloudflare, since forcing it
-  at the origin loops behind Flexible SSL);
-- sets the 404 page, MIME types and cache headers.
+**Apache** (alternative): upload the contents of `dist/`, including the hidden `.htaccess`, which
+answers every old URL with a proper 301, sends `avalonrpg.net` to `www.avalonrpg.net`, and sets the
+404 page, MIME types and cache headers (tested against Apache 2.4 with `AllowOverride All`).
 
-It was tested against Apache 2.4 with `AllowOverride All`. Nothing references
-`static.avalonrpg.net` any more; that subdomain can be retired once the new site is live.
+Nothing references `static.avalonrpg.net` any more; that subdomain can be retired.
 
 ## Privacy
 

@@ -1,6 +1,24 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <script>
+    // Old avalonrpg.net addresses. On Apache, public/.htaccess answers these with a 301; GitHub
+    // Pages has no redirects, so they land here and are forwarded before anything renders.
+    (function () {
+      var p = location.pathname.replace(/\/+$/, '');
+      var pages = {
+        '/index.php': '/', '/avalon-story.php': '/story/', '/avalon-characters.php': '/characters/',
+        '/avalon-music.php': '/music/', '/avalon-screens.php': '/media/#classic',
+        '/avalon-movie.php': '/media/#classic', '/avalon-download.php': '/original/#download',
+        '/avalon-awards.php': '/original/#awards', '/avalon-reviews.php': '/original/#reviews',
+        '/avalon-walkthrough.php': '/original/guide/', '/avalon-remake.php': '/original/',
+        '/avalon-links.php': '/original/#links', '/contact.php': '/contact/'
+      };
+      var to = pages[p];
+      if (!to && /^\/(downloads|mp3|images)\//.test(p)) to = '/classic' + location.pathname;
+      if (to) location.replace(to);
+    })();
+  </script>
   <!-- @include head -->
   <title>Page not found — Avalon</title>
   <meta name="robots" content="noindex" />
