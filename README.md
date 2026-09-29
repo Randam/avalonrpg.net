@@ -60,7 +60,7 @@ presents dialogue.
 ## Pages
 
 `/` (Legacy Edition) · `/characters/` · `/story/` · `/media/` · `/music/` · `/original/`
-(about, makers, download, awards, reviews, walkthrough, remakes, links, each linkable by
+(about, makers, download, awards, reviews, walkthrough, links, each linkable by
 `#hash`) · `/contact/` · `/privacy/` · `404.html`
 
 ## Deploying to the current host

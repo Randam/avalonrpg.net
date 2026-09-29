@@ -25,7 +25,7 @@ DirectoryIndex index.html
   RewriteRule ^avalon-awards\.php$      /original/#awards      [R=301,L,QSD,NE]
   RewriteRule ^avalon-reviews\.php$     /original/#reviews     [R=301,L,QSD,NE]
   RewriteRule ^avalon-walkthrough\.php$ /original/#walkthrough [R=301,L,QSD,NE]
-  RewriteRule ^avalon-remake\.php$      /original/#remake      [R=301,L,QSD,NE]
+  RewriteRule ^avalon-remake\.php$      /original/             [R=301,L,QSD]
   RewriteRule ^avalon-links\.php$       /original/#links       [R=301,L,QSD,NE]
   RewriteRule ^contact\.php$            /contact/              [R=301,L,QSD]
 
