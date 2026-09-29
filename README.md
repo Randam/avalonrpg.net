@@ -36,7 +36,8 @@ presents dialogue.
 
 - **`public/game/`**: generated, don't edit by hand. `scripts/import_game_assets.py` copies it
   from a sibling checkout of the game (`../Avalon-Remake`, or set `AVALON_REMAKE`): UI slices,
-  fonts, key art, the curated screenshots (with captions, spoiler-free) plus battle stills pulled
+  fonts, the approved key art (the portrait box art in `art/box-art/movie-poster-v2`, always shown
+  whole, never cropped), the curated screenshots (with captions, spoiler-free) plus battle stills pulled
   from the gameplay recordings, character portraits, item icons, the gameplay montage and the
   "chase" loop. It re-encodes to WebP/MP4/WebM at the sizes the site shows them. Needs Pillow,
   `cwebp` and `ffmpeg`.

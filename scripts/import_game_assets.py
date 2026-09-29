@@ -77,10 +77,13 @@ MACE_EMOTIONS = ["mace_talk01", "mace_smile", "mace_proud", "mace_thinking", "ma
 ITEM_ICONS = ["relic_disc", "swiss_watch", "map", "translator", "golden_key",
               "pick_axe", "torch", "necklace", "first_aid_kit", "master_key"]
 
+# The approved key art: the "movie poster" box art, v2. It only exists in portrait, and is shown
+# as-is — never cropped or recomposed; wide spaces get it framed on a blurred copy of itself.
+POSTER = ART / "box-art/movie-poster-v2/box-art_v2.jpg"
+
 # Painted art: (source, output stem, widths). The first width is the default src.
 PAINTED = [
-    (ART / "epic-store/v3/avalon-landscape-2560x1440.jpg", "art/keyart", [1920, 1280, 800]),
-    (ART / "epic-store/v3/avalon-portrait-1200x1600.jpg", "art/keyart-portrait", [900, 600]),
+    (POSTER, "art/poster", [1086, 720, 480]),
     (ART / "steam-capsules/background-v1/avalon-background-1438x810.png", "art/backdrop", [1438]),
     (ASSETS / "logos/title.png", "art/title-planet", [1280]),
 ]
@@ -149,6 +152,16 @@ def webp(src, rel, width=None, lossless=False, quality=82):
     return Image.open(out).size
 
 
+def blurred_backdrop(img, w, h):
+    """Cover-crop `img` to w×h, blur it heavily and darken it: a calm field in the art's own colours."""
+    from PIL import ImageEnhance, ImageFilter
+    scale = max(w / img.width, h / img.height)
+    big = img.resize((round(img.width * scale), round(img.height * scale)), Image.LANCZOS)
+    left, top = (big.width - w) // 2, (big.height - h) // 3
+    field = big.crop((left, top, left + w, top + h)).filter(ImageFilter.GaussianBlur(max(w, h) / 40))
+    return ImageEnhance.Brightness(field).enhance(0.55)
+
+
 def import_ui():
     for src, rel in UI_FILES.items():
         shutil.copyfile(ASSETS / src, dest(rel))
@@ -169,10 +182,19 @@ def import_painted():
     icon = Image.open(ART / "epic-store/v3/avalon-icon-512x512.png").convert("RGBA")
     for size, name in [(32, "favicon-32.png"), (180, "apple-touch-icon.png"), (512, "icon-512.png")]:
         icon.resize((size, size), Image.LANCZOS).save(dest(f"icons/{name}"))
-    # Social preview card: 1200x630 crop of the landscape key art.
-    land = Image.open(ART / "epic-store/v3/avalon-landscape-2560x1440.jpg").convert("RGB")
-    card = land.resize((1200, 675), Image.LANCZOS).crop((0, 22, 1200, 652))
+    # The poster's blurred backdrop (behind the hero) and the social preview card (the whole
+    # poster centred on that backdrop). Both keep the poster itself untouched.
+    poster = Image.open(POSTER).convert("RGB")
+    backdrop = blurred_backdrop(poster, 1920, 1080)
+    backdrop.save(dest("art/poster-backdrop.tmp.png"))
+    webp(dest("art/poster-backdrop.tmp.png"), "art/poster-backdrop-1920.webp", quality=70)  # deletes the tmp
+    card = blurred_backdrop(poster, 1200, 630)
+    inner = poster.resize((round(poster.width * 600 / poster.height), 600), Image.LANCZOS)
+    card.paste(inner, ((1200 - inner.width) // 2, 15))
     card.save(dest("art/og-card.jpg"), quality=86, optimize=True)
+    # Press kit: the approved poster at full size, and the transparent character layer.
+    shutil.copyfile(POSTER, dest("press/avalon-legacy-edition-key-art.jpg"))
+    shutil.copyfile(POSTER.parent / "box-art-characters-trans.png", dest("press/avalon-characters-transparent.png"))
 
 
 def import_portraits():
