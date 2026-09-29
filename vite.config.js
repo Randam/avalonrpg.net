@@ -9,7 +9,7 @@ const root = dirname(fileURLToPath(import.meta.url));
 const config = () => JSON.parse(readFileSync(resolve(root, 'site.config.json'), 'utf8'));
 
 // Every page is a folder with an index.html (pretty URLs on a plain static host).
-const PAGE_DIRS = ['', 'characters', 'story', 'media', 'music', 'original', 'contact', 'privacy'];
+const PAGE_DIRS = ['', 'characters', 'story', 'media', 'music', 'original', 'original/guide', 'contact', 'privacy'];
 
 const ICONS = {
   steam: simpleIcons.siSteam,
@@ -94,7 +94,7 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: Object.fromEntries([
-        ...PAGE_DIRS.map((d) => [d || 'home', resolve(root, d, 'index.html')]),
+        ...PAGE_DIRS.map((d) => [d.replace('/', '-') || 'home', resolve(root, d, 'index.html')]),
         ['404', resolve(root, '404.html')],
       ]),
     },

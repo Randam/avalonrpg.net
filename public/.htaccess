@@ -24,7 +24,7 @@ DirectoryIndex index.html
   RewriteRule ^avalon-download\.php$    /original/#download    [R=301,L,QSD,NE]
   RewriteRule ^avalon-awards\.php$      /original/#awards      [R=301,L,QSD,NE]
   RewriteRule ^avalon-reviews\.php$     /original/#reviews     [R=301,L,QSD,NE]
-  RewriteRule ^avalon-walkthrough\.php$ /original/#walkthrough [R=301,L,QSD,NE]
+  RewriteRule ^avalon-walkthrough\.php$ /original/guide/        [R=301,L,QSD]
   RewriteRule ^avalon-remake\.php$      /original/             [R=301,L,QSD]
   RewriteRule ^avalon-links\.php$       /original/#links       [R=301,L,QSD,NE]
   RewriteRule ^contact\.php$            /contact/              [R=301,L,QSD]
@@ -38,6 +38,7 @@ DirectoryIndex index.html
   AddType video/webm .webm
   AddType font/woff2 .woff2
   AddType application/manifest+json .webmanifest
+  AddType application/octet-stream .sav
 </IfModule>
 
 <IfModule mod_deflate.c>

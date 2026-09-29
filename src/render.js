@@ -78,7 +78,20 @@ const renderers = {
   },
 };
 
+/**
+ * A section of the 1998 guide (the Avalon shrine from RPGClassics, written by MiG Outpost and
+ * brought home): `guide-walkthrough` → src/data/guide/walkthrough.html. Tables get a scroll
+ * wrapper so they never widen the page on a phone; file links become downloads.
+ */
+function guide(section, root) {
+  return readFileSync(resolve(root, 'src/data/guide', `${section}.html`), 'utf8')
+    .replace(/<table>/g, '<div class="table-scroll"><table>')
+    .replace(/<\/table>/g, '</table></div>')
+    .replace(/<a href="(\/classic\/shrine\/files\/[^"]+)">/g, '<a href="$1" download>');
+}
+
 export function render(name, root) {
+  if (name.startsWith('guide-')) return guide(name.slice('guide-'.length), root);
   const fn = renderers[name];
   if (!fn) throw new Error(`Unknown @render block "${name}"`);
   return fn(root);

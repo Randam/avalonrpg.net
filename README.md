@@ -52,6 +52,12 @@ presents dialogue.
 - **`public/classic/`**: the old site's media, mirrored from avalonrpg.net and
   static.avalonrpg.net: the 1998 screenshots, the full MP3 soundtrack and remixes, the DOS
   download packages, the ZDNet award badge.
+- **`public/classic/shrine/`** and **`src/data/guide/`**: the complete Avalon shrine that
+  MiG Outpost wrote for RPGClassics (walkthrough, maps and area scans, weapons, defense, items,
+  objects, enemies, cheats, music, downloads, savegames, thanks), migrated to `/original/guide/`.
+  The fragments are the shrine's own HTML, cleaned to plain markup, with every link pointing at
+  this site; the images, tools and savegames it offered are mirrored alongside. `avalonsf.zip` is
+  rebuilt from `Sfont/` in the original game's repository, since its old host is gone.
 - **`src/data/`**: characters, tracklist and 1998 screenshot captions, rendered to static HTML
   at build time by `src/render.js` (`<!-- @render name -->` in a page).
 - **`site.config.json`**: store links, trailer id, analytics id, contact details. A store with
@@ -61,7 +67,7 @@ presents dialogue.
 
 `/` (Legacy Edition) · `/characters/` · `/story/` · `/media/` · `/music/` · `/original/`
 (about, makers, download, awards, reviews, walkthrough, links, each linkable by
-`#hash`) · `/contact/` · `/privacy/` · `404.html`
+`#hash`) · `/original/guide/` (the 1998 guide, one tab per section, e.g. `#enemies`, `#map-cave`) · `/contact/` · `/privacy/` · `404.html`
 
 ## Deploying to the current host
 
