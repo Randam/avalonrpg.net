@@ -473,8 +473,11 @@ p:last-child { margin-bottom: 0; }
 .footer-grid a { color: var(--ink); text-decoration: none; }
 .footer-grid a:hover { color: var(--gold-bright); text-decoration: underline; }
 .footer-brand > img { height: 56px; width: auto; margin-bottom: 10px; }
-.footer-studio { display: flex; align-items: center; gap: 12px; font-size: 15px; }
-.footer-studio img { width: 40px; height: auto; opacity: 0.9; }
+.footer-studio { display: inline-flex; align-items: center; gap: 14px; font-size: 15px; color: var(--ink-dim); text-decoration: none; margin-top: 4px; }
+.footer-studio img { width: 64px; height: auto; transition: transform 0.15s ease; }
+.footer-studio strong { color: var(--ink); }
+.footer-studio:hover strong { color: var(--gold-bright); text-decoration: underline; }
+.footer-studio:hover img { transform: scale(1.05); }
 .footer-bottom {
   margin-top: 36px;
   padding-top: 18px;
@@ -1070,3 +1073,22 @@ address { font-style: normal; }
 .soundtrack-cta h2 { color: var(--gold-bright); margin-bottom: 0.3em; }
 .soundtrack-btn { min-height: 62px; padding-inline: 8px; }
 .soundtrack-btn .icon { width: 28px; height: 28px; }
+
+/* Home: the studio credit. */
+.studio-band {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  max-width: 720px;
+  margin-inline: auto;
+  padding: 20px;
+  text-decoration: none;
+  color: var(--ink);
+}
+.studio-band img { width: 110px; height: auto; flex: none; filter: drop-shadow(0 4px 10px rgb(0 0 0 / 0.5)); transition: transform 0.15s ease; }
+.studio-band strong { display: block; font-size: 28px; color: var(--ink); }
+.studio-band-sub { display: block; color: var(--ink-dim); font-size: 17px; }
+.studio-band:hover img { transform: scale(1.05); }
+.studio-band:hover strong { color: var(--gold-bright); }
+@media (max-width: 520px) { .studio-band { flex-direction: column; text-align: center; } }
