@@ -1092,3 +1092,11 @@ address { font-style: normal; }
 .studio-band:hover img { transform: scale(1.05); }
 .studio-band:hover strong { color: var(--gold-bright); }
 @media (max-width: 520px) { .studio-band { flex-direction: column; text-align: center; } }
+
+/* Home: the boxed edition, above the store buttons. */
+.physical-edition {
+  display: block;
+  width: min(680px, 100%);
+  margin: 6px auto 22px;
+  filter: drop-shadow(0 14px 18px rgb(0 0 0 / 0.55));
+}

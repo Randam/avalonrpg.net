@@ -88,6 +88,8 @@ LANDSCAPE = SITE / "art/keyart-landscape.png"
 PAINTED = [
     (POSTER, "art/poster", [1086, 720, 480]),
     (LANDSCAPE, "art/keyart", [1930, 1280, 800]),
+    # The boxed physical edition with its Adventurer's Handbook, on transparency.
+    (GAME / "docs/packaging/output/avalon-physical-edition-transparent.png", "art/physical-edition", [1200, 800]),
     (ART / "steam-capsules/background-v1/avalon-background-1438x810.png", "art/backdrop", [1438]),
     (ASSETS / "logos/title.png", "art/title-planet", [1280]),
 ]
@@ -213,7 +215,18 @@ def import_screenshots():
             run("ffmpeg", "-y", "-v", "error", "-ss", second, "-i", str(ART / "videos" / clip),
                 "-frames:v", "1", str(src))
         else:
-            src = ART / "screenshots" / source
+            # Match on the name, not the number: the game repo renumbers its screenshots.
+            name = source.split("-", 1)[1]
+            found = sorted((ART / "screenshots").glob(f"[0-9]*-{name}"))
+            if not found:
+                kept = OUT / f"screens/{shot_id}.webp"
+                if not kept.exists():
+                    raise SystemExit(f"Screenshot {source} is gone from the game repo and was never imported.")
+                print(f"  ! {source} no longer exists in the game repo; keeping the imported copy")
+                w, h = Image.open(kept).size
+                shots.append({"id": shot_id, "caption": caption, "w": w, "h": h})
+                continue
+            src = found[-1]
         w, h = webp(src, f"screens/{shot_id}.webp", width=1600, quality=80)
         webp(src, f"screens/{shot_id}-thumb.webp", width=480, quality=72)
         shots.append({"id": shot_id, "caption": caption, "w": w, "h": h})
