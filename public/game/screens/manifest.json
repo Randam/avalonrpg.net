@@ -1,121 +1,190 @@
 [
  {
-  "id": "village",
-  "caption": "The village where the last of humanity settled",
-  "w": 1600,
-  "h": 900
- },
- {
-  "id": "battle-slime",
-  "caption": "Turn-based battles: a Green Slime in the forest",
+  "id": "snake",
+  "caption": "Turn-based battles: the snake of the cave",
+  "home": true,
   "w": 1600,
   "h": 900
  },
  {
   "id": "fleur",
   "caption": "Fleur has lost something in the woods",
-  "w": 1600,
-  "h": 900
- },
- {
-  "id": "forest",
-  "caption": "The forest north of the village",
-  "w": 1600,
-  "h": 900
- },
- {
-  "id": "cave",
-  "caption": "Something waits in the dark of the cave",
-  "w": 1600,
-  "h": 900
- },
- {
-  "id": "battle-snake",
-  "caption": "The snake of the cave",
-  "w": 1600,
-  "h": 900
- },
- {
-  "id": "beach",
-  "caption": "Meeting Kreznjerk on the beach",
-  "w": 1600,
-  "h": 900
- },
- {
-  "id": "alien-village",
-  "caption": "The village of the Syuglooc",
-  "w": 1600,
-  "h": 900
- },
- {
-  "id": "castle-entrance",
-  "caption": "The gate of the Dark Castle",
-  "w": 1600,
-  "h": 900
- },
- {
-  "id": "dungeon",
-  "caption": "The castle dungeon",
-  "w": 1600,
-  "h": 900
- },
- {
-  "id": "garden",
-  "caption": "The castle garden. Mind the trees",
+  "home": true,
   "w": 1600,
   "h": 900
  },
  {
   "id": "mace-home",
-  "caption": "Mace's home. That old computer looks familiar…",
+  "caption": "Mace's home. That floppy disk looks familiar…",
+  "home": false,
   "w": 1600,
   "h": 900
  },
  {
-  "id": "mountains",
-  "caption": "Sailing to the mountains",
+  "id": "dungeon-lee",
+  "caption": "Lee, held captive in the castle dungeon",
+  "home": true,
   "w": 1600,
   "h": 900
  },
  {
-  "id": "climb",
-  "caption": "Climbing the snowy peaks",
+  "id": "castle-gate",
+  "caption": "Guards at the gate of the Dark Castle",
+  "home": true,
   "w": 1600,
   "h": 900
  },
  {
-  "id": "battle-rattlesnake",
-  "caption": "The Rattlesnake of the mountains",
+  "id": "helena",
+  "caption": "Landing on Helena Island",
+  "home": true,
   "w": 1600,
   "h": 900
  },
  {
-  "id": "white-tower",
-  "caption": "The White Tower",
+  "id": "village-boat",
+  "caption": "Setting sail from the village",
+  "home": true,
   "w": 1600,
   "h": 900
  },
  {
-  "id": "shop",
-  "caption": "Alfa's general store",
+  "id": "dungeon-villagers",
+  "caption": "The villagers, locked up in the dungeon",
+  "home": false,
+  "w": 1600,
+  "h": 900
+ },
+ {
+  "id": "village-ending",
+  "caption": "Back in the village",
+  "home": false,
+  "w": 1600,
+  "h": 900
+ },
+ {
+  "id": "title",
+  "caption": "The title screen",
+  "home": false,
+  "w": 1600,
+  "h": 900
+ },
+ {
+  "id": "intro-demo",
+  "caption": "The intro: …Avalon",
+  "home": false,
   "w": 1600,
   "h": 900
  },
  {
   "id": "inventory",
   "caption": "Your bag: objects and battle items",
+  "home": false,
   "w": 1600,
   "h": 900
  },
  {
-  "id": "intro",
-  "caption": "The intro, redrawn",
+  "id": "village",
+  "caption": "The village where the last of humanity settled",
+  "home": false,
   "w": 1600,
   "h": 900
  },
  {
-  "id": "intro-eye",
-  "caption": "But appearances can be deceiving…",
+  "id": "forest",
+  "caption": "The forest beyond the village",
+  "home": false,
+  "w": 1600,
+  "h": 900
+ },
+ {
+  "id": "cave-entrance",
+  "caption": "The way into the cave",
+  "home": false,
+  "w": 1600,
+  "h": 900
+ },
+ {
+  "id": "cave",
+  "caption": "Something waits in the dark of the cave",
+  "home": false,
+  "w": 1600,
+  "h": 900
+ },
+ {
+  "id": "beach",
+  "caption": "Meeting Kreznjerk on the beach",
+  "home": false,
+  "w": 1600,
+  "h": 900
+ },
+ {
+  "id": "alien-village",
+  "caption": "The village of the Syuglooc",
+  "home": false,
+  "w": 1600,
+  "h": 900
+ },
+ {
+  "id": "helena-island",
+  "caption": "Exploring Helena Island",
+  "home": false,
+  "w": 1600,
+  "h": 900
+ },
+ {
+  "id": "garden",
+  "caption": "The castle garden. Mind the trees",
+  "home": false,
+  "w": 1600,
+  "h": 900
+ },
+ {
+  "id": "dark-guards",
+  "caption": "The Dark Guards at the castle doors",
+  "home": false,
+  "w": 1600,
+  "h": 900
+ },
+ {
+  "id": "living-tree",
+  "caption": "A living tree in the castle garden",
+  "home": false,
+  "w": 1600,
+  "h": 900
+ },
+ {
+  "id": "mountains",
+  "caption": "Crossing the sea to the mountains",
+  "home": false,
+  "w": 1600,
+  "h": 900
+ },
+ {
+  "id": "climb",
+  "caption": "Climbing the snowy peaks",
+  "home": false,
+  "w": 1600,
+  "h": 900
+ },
+ {
+  "id": "rattlesnake",
+  "caption": "The Rattlesnake of the mountains",
+  "home": false,
+  "w": 1600,
+  "h": 900
+ },
+ {
+  "id": "white-tower",
+  "caption": "The White Tower",
+  "home": false,
+  "w": 1600,
+  "h": 900
+ },
+ {
+  "id": "shop",
+  "caption": "Alfa's general store",
+  "home": false,
   "w": 1600,
   "h": 900
  }

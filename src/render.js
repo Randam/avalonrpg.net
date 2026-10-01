@@ -25,9 +25,9 @@ const renderers = {
     full: `/game/screens/${s.id}.webp`, thumb: `/game/screens/${s.id}-thumb.webp`, caption: s.caption, w: 480, h: 270,
   })).join('')}</ul>`,
 
-  /** The first six, for the home page. */
+  /** The ones marked for the home page (from the curated Steam selection). */
   'gallery-home': (root) => `<ul class="gallery" data-gallery>${legacyShots(root)
-    .filter((s) => ['village', 'battle-slime', 'beach', 'alien-village', 'battle-rattlesnake', 'garden'].includes(s.id))
+    .filter((s) => s.home)
     .map((s) => galleryItem({
       full: `/game/screens/${s.id}.webp`, thumb: `/game/screens/${s.id}-thumb.webp`, caption: s.caption, w: 480, h: 270,
     })).join('')}</ul>`,

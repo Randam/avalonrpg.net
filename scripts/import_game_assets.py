@@ -94,30 +94,43 @@ PAINTED = [
     (ASSETS / "logos/title.png", "art/title-planet", [1280]),
 ]
 
-# Screenshots shown on the site, in order: (id, source, caption). A source ending in
-# `.mp4@<second>` is a still taken from art/videos at that moment.
+# Screenshots shown on the site, in order: (id, source, caption, on the home page). Sources are
+# relative to art/screenshots in the game repo. The curated Steam set in selection/ comes first and
+# supplies the home page; the rest are picked from the full checkpoint set and the boss battles.
+# A source given without a folder is matched on its name, not its number (the set gets renumbered).
 SCREENSHOTS = [
-    ("village", "01-village_start.jpg", "The village where the last of humanity settled"),
-    ("battle-slime", "03_forest_battle.mp4@16", "Turn-based battles: a Green Slime in the forest"),
-    ("fleur", "02-fleur_intro.jpg", "Fleur has lost something in the woods"),
-    ("forest", "03-necklace_pickup.jpg", "The forest north of the village"),
-    ("cave", "08-cave_snake.jpg", "Something waits in the dark of the cave"),
-    ("battle-snake", "04b_snake_fight.mp4@16", "The snake of the cave"),
-    ("beach", "12-beach_kreznjerk.jpg", "Meeting Kreznjerk on the beach"),
-    ("alien-village", "18-alien_village.jpg", "The village of the Syuglooc"),
-    ("castle-entrance", "15-entrance_guards.jpg", "The gate of the Dark Castle"),
-    ("dungeon", "14-dungeon_lee.jpg", "The castle dungeon"),
-    ("garden", "22-garden_trees.jpg", "The castle garden. Mind the trees"),
-    ("mace-home", "05-mace_home_computer.jpg", "Mace's home. That old computer looks familiar…"),
-    ("mountains", "30-snow_start.jpg", "Sailing to the mountains"),
-    ("climb", "31-rattlesnake_first_meeting.jpg", "Climbing the snowy peaks"),
-    ("battle-rattlesnake", "14b_rattlesnake_fight.mp4@16", "The Rattlesnake of the mountains"),
-    ("white-tower", "43-wtower_entry.jpg", "The White Tower"),
-    ("shop", "51-shop_alfa.jpg", "Alfa's general store"),
-    ("inventory", "53-inventory.jpg", "Your bag: objects and battle items"),
-    ("intro", "49-intro_demo_5.jpg", "The intro, redrawn"),
-    ("intro-eye", "49-intro_demo_3.jpg", "But appearances can be deceiving…"),
+    ("snake", "selection/01-snake.jpg", "Turn-based battles: the snake of the cave", True),
+    ("fleur", "selection/02-fleur_intro.jpg", "Fleur has lost something in the woods", True),
+    ("mace-home", "selection/05-mace_home_computer.jpg", "Mace's home. That floppy disk looks familiar…", False),
+    ("dungeon-lee", "selection/14-dungeon_lee.jpg", "Lee, held captive in the castle dungeon", True),
+    ("castle-gate", "selection/15-entrance_guards.jpg", "Guards at the gate of the Dark Castle", True),
+    ("helena", "selection/19-helena_arrival.jpg", "Landing on Helena Island", True),
+    ("village-boat", "selection/34-village_boat.jpg", "Setting sail from the village", True),
+    ("dungeon-villagers", "selection/43-dungeon2_villagers.jpg", "The villagers, locked up in the dungeon", False),
+    ("village-ending", "selection/51-village_ending.jpg", "Back in the village", False),
+    ("title", "selection/53-intro_plate.jpg", "The title screen", False),
+    ("intro-demo", "selection/55-intro_demo.jpg", "The intro: …Avalon", False),
+    ("inventory", "selection/59-inventory.jpg", "Your bag: objects and battle items", False),
+    ("village", "village_start.jpg", "The village where the last of humanity settled", False),
+    ("forest", "necklace_pickup.jpg", "The forest beyond the village", False),
+    ("cave-entrance", "cave_entrance.jpg", "The way into the cave", False),
+    ("cave", "cave_snake.jpg", "Something waits in the dark of the cave", False),
+    ("beach", "beach_kreznjerk.jpg", "Meeting Kreznjerk on the beach", False),
+    ("alien-village", "alien_translator.jpg", "The village of the Syuglooc", False),
+    ("helena-island", "helena_zuma.jpg", "Exploring Helena Island", False),
+    ("garden", "garden_trees.jpg", "The castle garden. Mind the trees", False),
+    ("dark-guards", "bosses/02-dark_guards.jpg", "The Dark Guards at the castle doors", False),
+    ("living-tree", "bosses/03-living_tree.jpg", "A living tree in the castle garden", False),
+    ("mountains", "snow_start.jpg", "Crossing the sea to the mountains", False),
+    ("climb", "rattlesnake_first_meeting.jpg", "Climbing the snowy peaks", False),
+    ("rattlesnake", "bosses/08-rattlesnake.jpg", "The Rattlesnake of the mountains", False),
+    ("white-tower", "wtower_entry.jpg", "The White Tower", False),
+    ("shop", "shop_alfa.jpg", "Alfa's general store", False),
 ]
+
+# Stills used only by the story page. Their sources (intro_demo_3 / intro_demo_5) are no longer in
+# the game repo, so the copies imported earlier are kept as they are.
+STORY_STILLS = ["intro", "intro-eye"]
 
 # Gameplay montage for the home page: (clip, start second, length).
 MONTAGE = [
@@ -200,37 +213,26 @@ def import_portraits():
 
 
 def import_screenshots():
-    """The curated Legacy Edition screenshots, full size plus a thumbnail, and a manifest.
-
-    Picked by hand from art/screenshots (spoiler-free: no endings, no late reveals). That folder
-    has no battles, so those are stills pulled from the gameplay recordings instead.
-    """
+    """The site's screenshots, full size plus a thumbnail, and a manifest for the galleries."""
+    shots_dir = ART / "screenshots"
+    keep = {f"{i}{suffix}.webp" for i, *_ in SCREENSHOTS for suffix in ("", "-thumb")}
+    keep |= {f"{i}.webp" for i in STORY_STILLS} | {"manifest.json"}
     shots = []
-    tmp = OUT / "screens/.tmp"
-    tmp.mkdir(parents=True, exist_ok=True)
-    for shot_id, source, caption in SCREENSHOTS:
-        if ".mp4" in source:
-            clip, second = source.rsplit("@", 1) if "@" in source else (source, "10")
-            src = tmp / f"{shot_id}.png"
-            run("ffmpeg", "-y", "-v", "error", "-ss", second, "-i", str(ART / "videos" / clip),
-                "-frames:v", "1", str(src))
+    for shot_id, source, caption, home in SCREENSHOTS:
+        if "/" in source:
+            src = shots_dir / source
         else:
-            # Match on the name, not the number: the game repo renumbers its screenshots.
-            name = source.split("-", 1)[1]
-            found = sorted((ART / "screenshots").glob(f"[0-9]*-{name}"))
+            found = sorted(shots_dir.glob(f"[0-9]*-{source}"))
             if not found:
-                kept = OUT / f"screens/{shot_id}.webp"
-                if not kept.exists():
-                    raise SystemExit(f"Screenshot {source} is gone from the game repo and was never imported.")
-                print(f"  ! {source} no longer exists in the game repo; keeping the imported copy")
-                w, h = Image.open(kept).size
-                shots.append({"id": shot_id, "caption": caption, "w": w, "h": h})
-                continue
+                raise SystemExit(f"Screenshot {source} is not in {shots_dir}")
             src = found[-1]
         w, h = webp(src, f"screens/{shot_id}.webp", width=1600, quality=80)
         webp(src, f"screens/{shot_id}-thumb.webp", width=480, quality=72)
-        shots.append({"id": shot_id, "caption": caption, "w": w, "h": h})
-    shutil.rmtree(tmp)
+        shots.append({"id": shot_id, "caption": caption, "home": home, "w": w, "h": h})
+    # Drop screenshots that are no longer on the list.
+    for old in (OUT / "screens").glob("*"):
+        if old.name not in keep:
+            old.unlink()
     (OUT / "screens/manifest.json").write_text(json.dumps(shots, indent=1, ensure_ascii=False) + "\n")
 
 
