@@ -1100,3 +1100,63 @@ address { font-style: normal; }
   margin: 6px auto 22px;
   filter: drop-shadow(0 14px 18px rgb(0 0 0 / 0.55));
 }
+
+/* ------------------------------------------------------------------------------------------ */
+/* Avalon MSX                                                                                   */
+/* ------------------------------------------------------------------------------------------ */
+
+.msx-title-card { position: relative; display: block; padding: 0; text-decoration: none; color: var(--ink); }
+.msx-title-card img { display: block; width: 100%; height: auto; image-rendering: pixelated; }
+.msx-play-badge {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 20px;
+  text-shadow: 0 2px 4px #000;
+  background: radial-gradient(circle at center, rgb(0 0 0 / 0), rgb(0 0 0 / 0.35));
+  opacity: 0.92;
+  transition: opacity 0.15s ease;
+}
+.msx-title-card:hover .msx-play-badge { opacity: 1; }
+
+.msx-videos {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 440px), 1fr));
+  gap: 22px;
+}
+.msx-video { margin: 0; padding: 0 2px; }
+.msx-video video { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; background: #000; image-rendering: pixelated; }
+.msx-video figcaption { padding-top: 8px; font-size: 16px; color: var(--ink); }
+.gallery-msx .gallery-item img { aspect-ratio: 4 / 3; }
+
+/* The player page. */
+.msx-play { max-width: 1000px; }
+.msx-screen-frame { padding: 6px; }
+#wmsx { position: relative; display: flex; justify-content: center; min-height: 200px; background: #000; }
+#wmsx-screen { margin: 0 auto; }
+.msx-start {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: #000;
+  cursor: pointer;
+  font: inherit;
+  color: var(--ink);
+}
+.msx-start img { display: block; width: 100%; height: auto; image-rendering: pixelated; }
+.msx-start[disabled] { cursor: progress; }
+.msx-keys { display: grid; grid-template-columns: auto 1fr; gap: 6px 18px; margin: 0 0 14px; }
+.msx-keys dt { color: var(--gold); font-weight: 700; }
+.msx-keys dd { margin: 0; }
+.msx-slots { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 14px; }
+.msx-slots .tab[aria-checked='true'] { border-image-source: url('/game/ui/plate-brown.png'); color: var(--gold-bright); }
+button.plate[disabled] { opacity: 0.5; cursor: not-allowed; transform: none; }

@@ -52,6 +52,18 @@ presents dialogue.
 - **`public/classic/`**: the old site's media, mirrored from avalonrpg.net and
   static.avalonrpg.net: the 1998 screenshots, the full MP3 soundtrack and remixes, the DOS
   download packages, the ZDNet award badge.
+- **`public/msx/`** and **`public/game/msx/`**: Avalon MSX, the MSX2 cartridge port, from a sibling
+  checkout of `avalon-msx` (or `$AVALON_MSX`). `import-assets` copies `build/avalon-msx.rom` only if
+  its SHA-256 matches the build `recordings/manifest.json` was verified with, plus twelve native
+  320×240 screenshots, the ten gameplay clips (pillarbox cropped, scaled to 960×720
+  nearest-neighbour, MP4 with the MoonSound audio) and the title screen (`art/msx-title.png`,
+  captured from WebMSX).
+- **`/msx/play/`** runs the cartridge in [WebMSX](https://webmsx.org), loaded from jsDelivr pinned to
+  a commit (`site.config.json` → `msx.webmsx`) and only after the visitor presses Start. WebMSX has
+  no SRAM for ASCII16 cartridges over 2 MB, so the 4 MB ROM runs as plain ASCII16 and the game's own
+  saves can't stick; the page's Save/Load buttons use WebMSX savestates in the browser's IndexedDB
+  instead. Music works on MoonSound (`OPL4` preset), MSX-MUSIC and SCC+ (`SCCI2`); WebMSX has no
+  MSX-AUDIO.
 - **`public/classic/shrine/`** and **`src/data/guide/`**: the complete Avalon shrine that
   MiG Outpost wrote for RPGClassics (walkthrough, maps and area scans, weapons, defense, items,
   objects, enemies, cheats, music, downloads, savegames, thanks), migrated to `/original/guide/`.
@@ -67,7 +79,8 @@ presents dialogue.
 
 `/` (Legacy Edition) · `/characters/` · `/story/` · `/media/` · `/music/` · `/original/`
 (about, makers, download, awards, reviews, walkthrough, links, each linkable by
-`#hash`) · `/original/guide/` (the 1998 guide, one tab per section, e.g. `#enemies`, `#map-cave`) · `/contact/` · `/privacy/` · `404.html`
+`#hash`) · `/original/guide/` (the 1998 guide, one tab per section, e.g. `#enemies`, `#map-cave`) ·
+`/msx/` (Avalon MSX) · `/msx/play/` (Avalon MSX in WebMSX) · `/contact/` · `/privacy/` · `404.html`
 
 ## Deploying
 

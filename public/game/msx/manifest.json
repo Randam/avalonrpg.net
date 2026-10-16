@@ -1,0 +1,95 @@
+{
+ "rom_sha256": "b45a9031ab5881314dd8c3cc9caf8635b465359ec6cc0df09e2faf8ed5ec265b",
+ "shots": [
+  {
+   "id": "village",
+   "caption": "The village, in SCREEN 5"
+  },
+  {
+   "id": "fleur",
+   "caption": "Fleur's house in the village"
+  },
+  {
+   "id": "forest",
+   "caption": "The forest"
+  },
+  {
+   "id": "slime",
+   "caption": "Battle: a Green Slime"
+  },
+  {
+   "id": "mine",
+   "caption": "The mine, lit by Mace's torch"
+  },
+  {
+   "id": "kreznjerk",
+   "caption": "Kreznjerk on the beach"
+  },
+  {
+   "id": "castle",
+   "caption": "The castle entrance"
+  },
+  {
+   "id": "dark-guards",
+   "caption": "Battle: two Dark Guards"
+  },
+  {
+   "id": "garden",
+   "caption": "The castle garden"
+  },
+  {
+   "id": "living-tree",
+   "caption": "Battle: a Living Tree"
+  },
+  {
+   "id": "mountains",
+   "caption": "Rowing to the mountains"
+  },
+  {
+   "id": "white-tower",
+   "caption": "The White Tower"
+  }
+ ],
+ "videos": [
+  {
+   "id": "village",
+   "title": "A stroll through the village"
+  },
+  {
+   "id": "fleur",
+   "title": "Fleur's quest"
+  },
+  {
+   "id": "forest",
+   "title": "Exploring the forest"
+  },
+  {
+   "id": "snake",
+   "title": "The snake in the mine"
+  },
+  {
+   "id": "kreznjerk",
+   "title": "Kreznjerk on the beach"
+  },
+  {
+   "id": "guards",
+   "title": "The castle guards"
+  },
+  {
+   "id": "garden",
+   "title": "Battle in the castle garden"
+  },
+  {
+   "id": "mountains",
+   "title": "The mountains"
+  },
+  {
+   "id": "greycave",
+   "title": "The Grey Cave"
+  },
+  {
+   "id": "white-tower",
+   "title": "The White Tower"
+  }
+ ]
+}

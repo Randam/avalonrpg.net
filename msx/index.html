@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- @include head -->
+  <title>Avalon MSX — Avalon on the MSX2, at last</title>
+  <meta name="description" content="Avalon MSX brings Avalon to the MSX2, the computer it was always meant for. A self-booting cartridge ROM with MoonSound, MSX-MUSIC, MSX-AUDIO and SCC+ music. Play it in your browser." />
+  <link rel="canonical" href="{{siteUrl}}/msx/" />
+  <meta property="og:title" content="Avalon MSX" />
+  <meta property="og:description" content="Avalon on the MSX2, the computer it was always meant for. Play it in your browser." />
+  <meta property="og:url" content="{{siteUrl}}/msx/" />
+  <meta property="og:image" content="{{siteUrl}}/game/msx/title.png" />
+</head>
+<body data-page="msx">
+  <!-- @include header -->
+  <main id="main">
+    <div class="container page-hero">
+      <span class="eyebrow">MSX2 · cartridge ROM</span>
+      <h1>Avalon MSX</h1>
+      <p class="lead">Avalon, finally on the computer it was always meant for.</p>
+    </div>
+
+    <section class="section-tight">
+      <div class="container split">
+        <div>
+          <h2 class="plaque">Home at last</h2>
+          <p class="lead">Jeroen and Bowie Derwort started out on the MSX, and Avalon was meant to be an MSX game. It was inspired by MSX classics like SD Snatcher, Pumpkin Adventure, Ys III and Dragon Slayer VI, and even its music tracker was modelled on the MSX's Moonblaster.</p>
+          <p>Making it on the MSX didn't work out back then, so the brothers moved to the PC, and in 1998 Avalon came out for DOS.</p>
+          <p>Now Avalon has come home. Avalon MSX is a port of the DOS game to the MSX2, the platform that inspired it and the one it was made for.</p>
+          <div class="btn-row" style="margin-top: 20px">
+            <a class="plate plate-primary" href="/msx/play/">▶ Play in your browser</a>
+            <a class="plate" href="#videos">Watch it in action</a>
+          </div>
+        </div>
+        <a class="panel-ornate msx-title-card" href="/msx/play/" aria-label="Play Avalon MSX in your browser">
+          <img src="/game/msx/title.png" width="544" height="456" alt="The Avalon MSX title screen: the Avalon logo over a glowing sun, with New Game, Load Game and Options" />
+          <span class="msx-play-badge"><span class="yt-play-icon"></span><span>Play now</span></span>
+        </a>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="msx-tech">
+      <div class="container">
+        <div class="panel-rune">
+          <div class="center"><h2 class="plaque" id="msx-tech">On the MSX2</h2></div>
+          <div class="reqs">
+            <div>
+              <h3>The cartridge</h3>
+              <dl>
+                <dt>Format</dt><dd>Self-booting 4 MB ROM cartridge. No disk drive, MSX-DOS or extra files needed</dd>
+                <dt>Saves</dt><dd>Five save slots in 8 KB of battery-backed SRAM</dd>
+              </dl>
+            </div>
+            <div>
+              <h3>The machine</h3>
+              <dl>
+                <dt>Minimum</dt><dd>MSX2 with 64 KB RAM and 128 KB VRAM</dd>
+                <dt>Graphics</dt><dd>SCREEN 5 (256×212, 16 colours from 512), double-buffered, with hardware sprites for Mace, villagers and monsters</dd>
+              </dl>
+            </div>
+            <div>
+              <h3>The music</h3>
+              <dl>
+                <dt>Sound cards</dt><dd>MoonSound, MSX-MUSIC, MSX-AUDIO, both together in stereo, or SCC+. The game offers whichever are fitted</dd>
+                <dt>Soundtrack</dt><dd>All 37 tracks, plus PSG sound effects</dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-tight" id="videos" aria-labelledby="msx-videos-title">
+      <div class="container">
+        <div class="center"><h2 class="plaque" id="msx-videos-title">Gameplay</h2></div>
+        <p class="center muted" style="margin-top: -10px">Recorded on an emulated Philips NMS 8250 with MoonSound. Turn the sound on.</p>
+        <!-- @render msx-videos -->
+      </div>
+    </section>
+
+    <section class="section-tight" aria-labelledby="msx-shots-title">
+      <div class="container">
+        <div class="center"><h2 class="plaque" id="msx-shots-title">Screenshots</h2></div>
+        <!-- @render msx-gallery -->
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="msx-play-title">
+      <div class="container" style="max-width: 900px">
+        <div class="panel-ornate has-crown center">
+          <img class="panel-crown" src="/game/ui/ornate-crown.png" alt="" width="220" height="52" />
+          <h2 id="msx-play-title">Play Avalon MSX now</h2>
+          <p>No MSX at hand? Play it right here in your browser, in the WebMSX emulator.</p>
+          <div class="btn-row" style="justify-content: center">
+            <a class="plate plate-primary" href="/msx/play/">▶ Play in your browser</a>
+            <a class="plate" href="/original/">The 1998 DOS original</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <!-- @include footer -->
+</body>
+</html>

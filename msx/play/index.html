@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- @include head -->
+  <title>Play Avalon MSX in your browser</title>
+  <meta name="description" content="Play Avalon MSX, the MSX2 version of Avalon, right in your browser with the WebMSX emulator." />
+  <link rel="canonical" href="{{siteUrl}}/msx/play/" />
+  <meta property="og:title" content="Play Avalon MSX in your browser" />
+  <meta property="og:url" content="{{siteUrl}}/msx/play/" />
+  <meta property="og:image" content="{{siteUrl}}/game/msx/title.png" />
+</head>
+<body data-page="msx">
+  <!-- @include header -->
+  <main id="main">
+    <div class="container page-hero">
+      <span class="eyebrow">Avalon MSX · in WebMSX</span>
+      <h1>Play Avalon MSX</h1>
+      <p class="lead">An emulated European MSX2 with MoonSound and an SCC+ cartridge, running the Avalon MSX cartridge. Click the screen and start your adventure.</p>
+    </div>
+
+    <section class="section-tight">
+      <div class="container msx-play">
+        <div class="panel-ornate has-crown msx-screen-frame">
+          <img class="panel-crown" src="/game/ui/ornate-crown.png" alt="" width="220" height="52" />
+          <div id="wmsx" data-msx-player
+               data-rom="{{msx.rom}}" data-machine="{{msx.webmsx.machine}}"
+               data-presets="{{msx.webmsx.presets}}" data-format="{{msx.webmsx.format}}"
+               data-script="{{msx.webmsx.script}}">
+            <div id="wmsx-screen"></div>
+            <button type="button" class="msx-start" data-msx-start>
+              <img src="/game/msx/title.png" width="544" height="456" alt="" />
+              <span class="yt-play"><span class="yt-play-icon"></span><span class="yt-play-label">Start the MSX</span></span>
+            </button>
+          </div>
+        </div>
+        <p class="yt-note">Starting loads the WebMSX emulator (about 5 MB) and the 4 MB game cartridge.</p>
+
+        <div class="grid-2" style="margin-top: 32px; align-items: start">
+          <div class="panel-rune">
+            <h2>Controls</h2>
+            <dl class="msx-keys">
+              <dt>Arrow keys</dt><dd>Walk</dd>
+              <dt>Space or Enter</dt><dd>Talk, confirm, attack</dd>
+              <dt>Esc or F1</dt><dd>Menu: objects, items, status, load and save</dd>
+            </dl>
+            <p class="small muted">Click the screen first so it receives your keys. On a phone or tablet, WebMSX shows touch controls. Pick a different sound card under <strong>Options → Music</strong>: MoonSound, MSX-MUSIC or SCC+.</p>
+          </div>
+
+          <div class="panel-dialogue">
+            <h2 style="font-size: 24px">Saving your game</h2>
+            <p>On a real MSX, Avalon saves to the cartridge's battery-backed memory. The emulator can't provide that memory for a cartridge this size, so the game's own <em>Save Game</em> won't keep anything here.</p>
+            <p>Instead, save the whole machine to this browser:</p>
+            <div class="msx-slots" role="radiogroup" aria-label="Save slot">
+              <button type="button" class="plate tab" role="radio" aria-checked="true" data-msx-slot="1">Slot 1</button>
+              <button type="button" class="plate tab" role="radio" aria-checked="false" data-msx-slot="2">Slot 2</button>
+              <button type="button" class="plate tab" role="radio" aria-checked="false" data-msx-slot="3">Slot 3</button>
+            </div>
+            <div class="btn-row">
+              <button type="button" class="plate plate-primary" data-msx-save disabled>Save</button>
+              <button type="button" class="plate" data-msx-load disabled>Load</button>
+            </div>
+            <p class="small muted" style="margin-top: 12px" data-msx-status aria-live="polite">Start the MSX to save or load.</p>
+          </div>
+        </div>
+
+        <p class="center small muted" style="margin-top: 28px">Emulation by <a href="https://webmsx.org" rel="noopener">WebMSX</a> by Paulo Augusto Peccin. <a href="/msx/">More about Avalon MSX</a></p>
+      </div>
+    </section>
+  </main>
+  <!-- @include footer -->
+</body>
+</html>

@@ -22,6 +22,7 @@
         <div class="tabs" role="tablist" aria-label="Edition" data-hash>
           <button type="button" class="plate tab" role="tab" id="tab-legacy" aria-controls="legacy" aria-selected="true">Legacy Edition</button>
           <button type="button" class="plate tab" role="tab" id="tab-classic" aria-controls="classic" aria-selected="false">Original 1998</button>
+          <button type="button" class="plate tab" role="tab" id="tab-msx" aria-controls="msx" aria-selected="false">Avalon MSX</button>
         </div>
 
         <div class="tab-panel" id="legacy" role="tabpanel" aria-labelledby="tab-legacy" tabindex="0">
@@ -69,6 +70,14 @@
           </div>
           <h2 class="plaque" style="margin-top: 48px">Screenshots</h2>
           <!-- @render gallery-classic -->
+        </div>
+
+        <div class="tab-panel" id="msx" role="tabpanel" aria-labelledby="tab-msx" tabindex="0" hidden>
+          <div class="panel-dialogue" style="margin-bottom: 32px">
+            <p><strong>Avalon MSX</strong> is Avalon on the MSX2, the computer it was always meant for. Ten gameplay videos with MoonSound music are on the <a href="/msx/#videos">Avalon MSX page</a>, and you can <a href="/msx/play/">play it in your browser</a>.</p>
+          </div>
+          <h2 class="plaque">Screenshots</h2>
+          <!-- @render msx-gallery -->
         </div>
       </div>
     </section>

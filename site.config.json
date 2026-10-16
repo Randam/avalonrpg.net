@@ -55,5 +55,14 @@
   "studio": {
     "name": "Seven Mages",
     "url": "https://www.sevenmages.com"
+  },
+  "msx": {
+    "rom": "/msx/avalon-msx.rom",
+    "webmsx": {
+      "script": "https://cdn.jsdelivr.net/gh/ppeccin/WebMSX@4f4009e86d3e0bb9be7dcd7f0a582b0cd411d660/release/stable/6.0/embedded/wmsx.js",
+      "machine": "MSX2E",
+      "presets": "OPL4,SCCI2",
+      "format": "ASCII16"
+    }
   }
 }

@@ -37,6 +37,18 @@ const renderers = {
     .map((s) => galleryItem({ full: encodeURI(s.src), thumb: encodeURI(s.src), caption: s.caption, w: 320, h: 200 }))
     .join('')}</ul>`,
 
+  /** Avalon MSX screenshots: native 320×240 captures, scaled up crisply. */
+  'msx-gallery': (root) => `<ul class="gallery gallery-classic gallery-msx" data-gallery data-gallery-classic>${json(root, 'public/game/msx/manifest.json').shots
+    .map((s) => galleryItem({ full: `/game/msx/shots/${s.id}.png`, thumb: `/game/msx/shots/${s.id}.png`, caption: s.caption, w: 320, h: 240 }))
+    .join('')}</ul>`,
+
+  /** Avalon MSX gameplay clips, with their MoonSound audio; nothing loads until play is pressed. */
+  'msx-videos': (root) => `<ul class="msx-videos">${json(root, 'public/game/msx/manifest.json').videos
+    .map((v) => `<li><figure class="panel-dialogue msx-video">`
+      + `<video controls preload="none" playsinline width="960" height="720" poster="/game/msx/video/${v.id}.jpg">`
+      + `<source src="/game/msx/video/${v.id}.mp4" type="video/mp4" /></video>`
+      + `<figcaption>${esc(v.title)}</figcaption></figure></li>`).join('')}</ul>`,
+
   /** Character select: the slot grid, then one bio card per character (JS shows one at a time). */
   characters: (root) => {
     const chars = json(root, 'src/data/characters.json');

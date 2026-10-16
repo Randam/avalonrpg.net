@@ -8,6 +8,7 @@ import { initGalleries } from './components/gallery.js';
 import { initCharacters } from './components/characters.js';
 import { initMusic } from './components/music.js';
 import { initAmbientVideo } from './components/ambient-video.js';
+import { initMsxPlayer } from './components/msx-player.js';
 
 initNav();
 initConsent(config.googleAnalyticsId);
@@ -17,6 +18,7 @@ initGalleries();
 initCharacters();
 initMusic();
 initAmbientVideo();
+initMsxPlayer();
 
 // Store link clicks are the site's one real conversion; report them when analytics is allowed.
 document.addEventListener('click', (e) => {

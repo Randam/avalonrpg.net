@@ -13,6 +13,7 @@ re-encoded to WebP at the widths the site actually displays them.
 
 Needs Pillow, `cwebp` and `ffmpeg` on the PATH.
 """
+import hashlib
 import json
 import os
 import shutil
@@ -27,6 +28,8 @@ GAME = Path(os.environ.get("AVALON_REMAKE", SITE.parent / "Avalon-Remake")).reso
 OUT = SITE / "public" / "game"
 
 ASSETS = GAME / "public" / "assets"
+# Avalon MSX, the MSX2 cartridge port (sibling checkout `../avalon-msx`, or $AVALON_MSX).
+MSX = Path(os.environ.get("AVALON_MSX", SITE.parent / "avalon-msx")).resolve()
 ART = GAME / "art"
 
 # UI pieces, copied byte for byte. The site's CSS nine-slices these with the
@@ -131,6 +134,37 @@ SCREENSHOTS = [
 # Stills used only by the story page. Their sources (intro_demo_3 / intro_demo_5) are no longer in
 # the game repo, so the copies imported earlier are kept as they are.
 STORY_STILLS = ["intro", "intro-eye"]
+
+# Avalon MSX screenshots (320×240, straight from openMSX; the site scales them up pixelated):
+# (id, file in avalon-msx/recordings, caption).
+MSX_SCREENSHOTS = [
+    ("village", "01_village_stroll.png", "The village, in SCREEN 5"),
+    ("fleur", "02_fleur_quest.png", "Fleur's house in the village"),
+    ("forest", "03_forest_exploration.png", "The forest"),
+    ("slime", "03_forest_exploration-end.png", "Battle: a Green Slime"),
+    ("mine", "04_cave_snake.png", "The mine, lit by Mace's torch"),
+    ("kreznjerk", "05_beach_kreznjerk-end.png", "Kreznjerk on the beach"),
+    ("castle", "06_castle_guards.png", "The castle entrance"),
+    ("dark-guards", "06_castle_guards-end.png", "Battle: two Dark Guards"),
+    ("garden", "07_garden_battle.png", "The castle garden"),
+    ("living-tree", "07_garden_battle-end.png", "Battle: a Living Tree"),
+    ("mountains", "08_mountains.png", "Rowing to the mountains"),
+    ("white-tower", "10_white_tower.png", "The White Tower"),
+]
+
+# Avalon MSX gameplay clips (30 s each, MoonSound audio): (id, file in recordings, title).
+MSX_VIDEOS = [
+    ("village", "01_village_stroll.mp4", "A stroll through the village"),
+    ("fleur", "02_fleur_quest.mp4", "Fleur's quest"),
+    ("forest", "03_forest_exploration.mp4", "Exploring the forest"),
+    ("snake", "04_cave_snake.mp4", "The snake in the mine"),
+    ("kreznjerk", "05_beach_kreznjerk.mp4", "Kreznjerk on the beach"),
+    ("guards", "06_castle_guards.mp4", "The castle guards"),
+    ("garden", "07_garden_battle.mp4", "Battle in the castle garden"),
+    ("mountains", "08_mountains.mp4", "The mountains"),
+    ("greycave", "09_greycave.mp4", "The Grey Cave"),
+    ("white-tower", "10_white_tower.mp4", "The White Tower"),
+]
 
 # Gameplay montage for the home page: (clip, start second, length).
 MONTAGE = [
@@ -270,12 +304,59 @@ def import_video():
     shutil.rmtree(tmpdir)
 
 
+def import_msx(with_video=True):
+    """Avalon MSX: the verified cartridge ROM, screenshots, gameplay clips and the title screen."""
+    rec = MSX / "recordings"
+    manifest = json.loads((rec / "manifest.json").read_text())
+    rom = MSX / "build/avalon-msx.rom"
+    digest = hashlib.sha256(rom.read_bytes()).hexdigest()
+    if digest != manifest["rom_sha256"]:
+        # Only ever publish the build the recordings and WARP checks were made with.
+        raise SystemExit(f"{rom} ({digest[:12]}…) is not the verified build "
+                         f"({manifest['rom_sha256'][:12]}…) from recordings/manifest.json")
+    msx_out = SITE / "public/msx"
+    msx_out.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(rom, msx_out / "avalon-msx.rom")
+
+    for shot_id, name, _ in MSX_SCREENSHOTS:
+        shutil.copyfile(rec / name, dest(f"msx/shots/{shot_id}.png"))
+    title = Image.open(SITE / "art/msx-title.png").convert("RGB")
+    title.save(dest("msx/title.png"), optimize=True)
+
+    (OUT / "msx/manifest.json").write_text(json.dumps({
+        "rom_sha256": digest,
+        "shots": [{"id": i, "caption": c} for i, _, c in MSX_SCREENSHOTS],
+        "videos": [{"id": i, "title": t} for i, _, t in MSX_VIDEOS],
+    }, indent=1, ensure_ascii=False) + "\n")
+
+    if not with_video:
+        return
+    # The clips are 1920×1080 with the 4:3 picture pillarboxed and scaled up nearest-neighbour;
+    # crop the picture and bring it down to 960×720 the same way, so the pixels stay square.
+    # MP4 only: every browser plays H.264, and VP9 came out larger for this footage.
+    vf = "crop=1440:1080:240:0,scale=960:720:flags=neighbor"
+    for vid, name, _ in MSX_VIDEOS:
+        src = str(rec / name)
+        run("ffmpeg", "-y", "-v", "error", "-i", src, "-vf", vf, "-c:v", "libx264", "-crf", "23",
+            "-preset", "slow", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "128k",
+            "-movflags", "+faststart", str(dest(f"msx/video/{vid}.mp4")))
+        # Poster from 4 s in: some clips open on a black frame.
+        run("ffmpeg", "-y", "-v", "error", "-ss", "4", "-i", src, "-vf", vf, "-frames:v", "1",
+            "-q:v", "7", str(dest(f"msx/video/{vid}.jpg")))
+
+
 def main():
     if not ASSETS.is_dir():
         sys.exit(f"Game repository not found at {GAME} — set AVALON_REMAKE.")
     steps = [import_ui, import_painted, import_portraits, import_screenshots]
     if "--skip-video" not in sys.argv:
         steps.append(import_video)
+    if MSX.is_dir():
+        def import_avalon_msx():
+            import_msx(with_video="--skip-video" not in sys.argv)
+        steps.append(import_avalon_msx)
+    else:
+        print(f"  ! {MSX} not found; Avalon MSX assets left as they are")
     for step in steps:
         print(f"· {step.__name__}")
         step()
