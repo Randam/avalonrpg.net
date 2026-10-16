@@ -324,6 +324,9 @@ p:last-child { margin-bottom: 0; }
   filter: grayscale(0.5) drop-shadow(0 3px 6px rgb(0 0 0 / 0.45));
 }
 .store-btn.is-soon:hover { transform: none; }
+/* The browser demo: one wide button above the store list, the page's first thing to do. */
+.play-demo-btn { justify-content: center; min-height: 70px; margin-bottom: 14px; }
+.play-demo-btn .store-btn-label { font-size: 21px; }
 
 .btn-row { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
 

@@ -12,6 +12,11 @@
     "city": "Zoetermeer",
     "country": "The Netherlands"
   },
+  "webDemo": {
+    "url": "https://play.avalonrpg.net/",
+    "label": "Play the demo in your browser",
+    "sub": "Free · no download · computer, tablet or phone"
+  },
   "stores": [
     {
       "id": "steam",

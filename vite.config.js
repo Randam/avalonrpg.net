@@ -19,6 +19,7 @@ const ICONS = {
   youtube: simpleIcons.siYoutube,
   github: simpleIcons.siGithub,
   linkedin: simpleIcons.siLinkedin,
+  play: { path: 'M7 4.5v15l12.5-7.5z' }, // a plain play triangle; simple-icons only has brands
 };
 
 function icon(name) {
@@ -38,6 +39,16 @@ function stores(variant, cfg) {
       : `<li><span class="${cls}" aria-disabled="true" data-store="${s.id}">${body}</span></li>`;
   });
   return `<ul class="store-list store-list-${variant}" aria-label="Where to get Avalon: Legacy Edition">${items.join('')}</ul>`;
+}
+
+/** The browser demo (play.avalonrpg.net), shaped like a store button. `place` names the spot in the
+ *  link (utm_campaign=site-<place>), so the demo's analytics can tell which button was used. */
+function playDemo(place, cfg) {
+  const d = cfg.webDemo;
+  const url = `${d.url}?utm_source=avalonrpg&utm_campaign=site-${place || 'button'}`;
+  return `<a class="store-btn plate plate-primary play-demo-btn" href="${url}" target="_blank" rel="noopener" data-store="web-demo">`
+    + `${icon('play')}<span class="store-btn-text"><span class="store-btn-label">${d.label}</span>`
+    + `<span class="store-btn-sub">${d.sub}</span></span></a>`;
 }
 
 /** Call to action for the full soundtrack on Steam; says "coming" until `released` is set. */
@@ -65,6 +76,7 @@ function siteTemplate() {
         let out = include(include(html));
         out = out.replace(/<!--\s*@render\s+([\w-]+)\s*-->/g, (_, name) => render(name, root));
         out = out.replace(/<!--\s*@soundtrack\s*-->/g, () => soundtrack(cfg));
+        out = out.replace(/<!--\s*@playdemo\s*([\w-]*)\s*-->/g, (_, place) => playDemo(place, cfg));
         out = out.replace(/<!--\s*@stores\s*([\w-]*)\s*-->/g, (_, v) => stores(v || 'full', cfg));
         out = out.replace(/\{\{\s*icon:([\w-]+)\s*\}\}/g, (_, n) => icon(n));
         out = out.replace(/\{\{\s*([\w.]+)\s*\}\}/g, (m, key) => {
