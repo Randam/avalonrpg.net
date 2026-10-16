@@ -37,6 +37,19 @@ const renderers = {
     .map((s) => galleryItem({ full: encodeURI(s.src), thumb: encodeURI(s.src), caption: s.caption, w: 320, h: 200 }))
     .join('')}</ul>`,
 
+  /** The merch designs, each linking to the store (the URL is filled in by the template pass). */
+  merch: (root) => `<ul class="merch-grid">${json(root, 'public/game/merch/manifest.json')
+    .map((m) => `<li><a class="merch-card" href="{{shop.url}}" target="_blank" rel="noopener" data-store="merch">`
+      + `<span class="merch-art"><img src="/game/merch/${m.id}.webp" alt="" width="${m.w}" height="${m.h}" loading="lazy" /></span>`
+      + `<span class="merch-name">${esc(m.name)}</span></a></li>`).join('')}</ul>`,
+
+  /** Four designs for the home page. */
+  'merch-home': (root) => `<ul class="merch-grid merch-grid-home">${json(root, 'public/game/merch/manifest.json')
+    .filter((m) => ['the-village', 'three-bosses', 'pixel-chicken', 'fleur'].includes(m.id))
+    .map((m) => `<li><a class="merch-card" href="/shop/">`
+      + `<span class="merch-art"><img src="/game/merch/${m.id}.webp" alt="" width="${m.w}" height="${m.h}" loading="lazy" /></span>`
+      + `<span class="merch-name">${esc(m.name)}</span></a></li>`).join('')}</ul>`,
+
   /** Avalon MSX screenshots: native 320×240 captures, scaled up crisply. */
   'msx-gallery': (root) => `<ul class="gallery gallery-classic gallery-msx" data-gallery data-gallery-classic>${json(root, 'public/game/msx/manifest.json').shots
     .map((s) => galleryItem({ full: `/game/msx/shots/${s.id}.png`, thumb: `/game/msx/shots/${s.id}.png`, caption: s.caption, w: 320, h: 240 }))

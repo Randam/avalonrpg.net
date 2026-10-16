@@ -65,5 +65,9 @@
       "format": "ASCII16"
     },
     "romDownloadName": "Avalon MSX.rom"
+  },
+  "shop": {
+    "name": "Seven Mages Store",
+    "url": "https://seven-mages-store.myspreadshop.com/"
   }
 }

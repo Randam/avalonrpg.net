@@ -1,0 +1,50 @@
+[
+ {
+  "id": "cave-entrance",
+  "name": "Cave Entrance",
+  "w": 680,
+  "h": 338
+ },
+ {
+  "id": "the-village",
+  "name": "The Village",
+  "w": 680,
+  "h": 338
+ },
+ {
+  "id": "helena-island",
+  "name": "Helena Island",
+  "w": 680,
+  "h": 338
+ },
+ {
+  "id": "alien-village",
+  "name": "Alien Village",
+  "w": 680,
+  "h": 338
+ },
+ {
+  "id": "castle-gate",
+  "name": "Castle Gate",
+  "w": 680,
+  "h": 338
+ },
+ {
+  "id": "three-bosses",
+  "name": "Three Bosses",
+  "w": 680,
+  "h": 205
+ },
+ {
+  "id": "pixel-chicken",
+  "name": "Pixel Chicken",
+  "w": 500,
+  "h": 500
+ },
+ {
+  "id": "fleur",
+  "name": "Fleur",
+  "w": 500,
+  "h": 500
+ }
+]

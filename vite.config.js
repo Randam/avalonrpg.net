@@ -9,7 +9,7 @@ const root = dirname(fileURLToPath(import.meta.url));
 const config = () => JSON.parse(readFileSync(resolve(root, 'site.config.json'), 'utf8'));
 
 // Every page is a folder with an index.html (pretty URLs on a plain static host).
-const PAGE_DIRS = ['', 'characters', 'story', 'media', 'music', 'original', 'original/guide', 'msx', 'msx/play', 'contact', 'privacy'];
+const PAGE_DIRS = ['', 'characters', 'story', 'media', 'music', 'original', 'original/guide', 'msx', 'msx/play', 'shop', 'contact', 'privacy'];
 
 const ICONS = {
   steam: simpleIcons.siSteam,

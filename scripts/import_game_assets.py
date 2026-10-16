@@ -166,6 +166,21 @@ MSX_VIDEOS = [
     ("white-tower", "10_white_tower.mp4", "The White Tower"),
 ]
 
+# Merch: the T-shirt designs on sale in the Seven Mages Store (Spreadshop), from the game repo's
+# art/merch/authentic-v5/batch-01-tshirts. (id, design file id, name as in the store). Only list
+# designs that are live in the store; the site shows them and links to the store.
+MERCH_DIR = ART / "merch/authentic-v5/batch-01-tshirts"
+MERCH = [
+    ("cave-entrance", "v5-t10", "Cave Entrance"),
+    ("the-village", "v5-t09", "The Village"),
+    ("helena-island", "v5-t08", "Helena Island"),
+    ("alien-village", "v5-t07", "Alien Village"),
+    ("castle-gate", "v5-t06", "Castle Gate"),
+    ("three-bosses", "v5-t05", "Three Bosses"),
+    ("pixel-chicken", "v5-t04", "Pixel Chicken"),
+    ("fleur", "v5-t03", "Fleur"),
+]
+
 # Gameplay montage for the home page: (clip, start second, length).
 MONTAGE = [
     ("01_village_stroll.mp4", 3, 4),
@@ -304,6 +319,16 @@ def import_video():
     shutil.rmtree(tmpdir)
 
 
+def import_merch():
+    """The merch designs' web previews (transparent WebP) and the list the shop page renders."""
+    items = []
+    for merch_id, design, name in MERCH:
+        shutil.copyfile(MERCH_DIR / "previews" / f"{design}.webp", dest(f"merch/{merch_id}.webp"))
+        w, h = Image.open(MERCH_DIR / "previews" / f"{design}.webp").size
+        items.append({"id": merch_id, "name": name, "w": w, "h": h})
+    (OUT / "merch/manifest.json").write_text(json.dumps(items, indent=1) + "\n")
+
+
 def import_msx(with_video=True):
     """Avalon MSX: the verified cartridge ROM, screenshots, gameplay clips and the title screen."""
     rec = MSX / "recordings"
@@ -348,7 +373,7 @@ def import_msx(with_video=True):
 def main():
     if not ASSETS.is_dir():
         sys.exit(f"Game repository not found at {GAME} — set AVALON_REMAKE.")
-    steps = [import_ui, import_painted, import_portraits, import_screenshots]
+    steps = [import_ui, import_painted, import_portraits, import_screenshots, import_merch]
     if "--skip-video" not in sys.argv:
         steps.append(import_video)
     if MSX.is_dir():

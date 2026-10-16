@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- @include head -->
+  <title>Merch — Avalon: Legacy Edition</title>
+  <meta name="description" content="Avalon: Legacy Edition T-shirts, with scenes, bosses and characters from the game. Printed on demand in the Seven Mages Store." />
+  <link rel="canonical" href="{{siteUrl}}/shop/" />
+  <meta property="og:title" content="Avalon merch" />
+  <meta property="og:description" content="T-shirts with scenes, bosses and characters from Avalon: Legacy Edition." />
+  <meta property="og:url" content="{{siteUrl}}/shop/" />
+  <meta property="og:image" content="{{siteUrl}}/game/merch/the-village.webp" />
+</head>
+<body data-page="shop">
+  <!-- @include header -->
+  <main id="main">
+    <div class="container page-hero">
+      <span class="eyebrow">The Seven Mages Store</span>
+      <h1>Wear Avalon</h1>
+      <p class="lead">Scenes, bosses and faces from Avalon: Legacy Edition, on T-shirts. Every design comes as a unisex, men's and women's shirt.</p>
+      <div class="btn-row" style="justify-content: center; margin-top: 18px">
+        <a class="plate plate-primary" href="{{shop.url}}" target="_blank" rel="noopener" data-store="merch">Visit the {{shop.name}} ↗</a>
+      </div>
+    </div>
+
+    <section class="section-tight" aria-label="Designs">
+      <div class="container">
+        <!-- @render merch -->
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="shop-how">
+      <div class="container" style="max-width: 860px">
+        <div class="panel-dialogue">
+          <div class="speech">
+            <img class="speech-portrait" src="/game/portraits/caw.webp" width="256" height="256" alt="" />
+            <div>
+              <span class="speech-name" id="shop-how">Caw</span>
+              <p>I buy everything that ticks, but these I'd wear. They're printed on demand and shipped by Spreadshirt: pick a design, a shirt and a size in the {{shop.name}}.</p>
+              <div class="btn-row"><a class="plate plate-primary" href="{{shop.url}}" target="_blank" rel="noopener" data-store="merch">To the store ↗</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <!-- @include footer -->
+</body>
+</html>
