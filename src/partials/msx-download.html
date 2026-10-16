@@ -1,0 +1,15 @@
+<div class="panel-rune msx-download" id="download">
+  <h2>Download the cartridge</h2>
+  <p>For a real MSX2 with a flash cartridge, or an emulator like openMSX, where the game's own saves work.</p>
+  <a class="plate plate-primary" href="{{msx.rom}}" download="{{msx.romDownloadName}}" data-store="msx-rom">⬇ Download Avalon MSX ROM (4 MB)</a>
+  <dl class="msx-keys" style="margin-top: 18px">
+    <dt>Cartridge</dt><dd>4 MB ROM, mapper ASCII16-SRAM8 with 8 KB battery-backed SRAM</dd>
+    <dt>Machine</dt><dd>MSX2, 64 KB RAM, 128 KB VRAM</dd>
+    <dt>Music</dt><dd>MoonSound, MSX-MUSIC, MSX-AUDIO or SCC+, optional</dd>
+  </dl>
+  <p class="small muted" style="margin-bottom: 6px">In openMSX:</p>
+  <pre class="msx-cmd"><code>openmsx -machine Philips_NMS_8250 \
+  -ext Moonsound -ext scc+ \
+  -cart "Avalon MSX.rom" -romtype ASCII16SRAM8</code></pre>
+  <p class="small muted msx-sha">SHA-256: <code><!-- @render msx-sha --></code></p>
+</div>

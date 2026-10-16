@@ -1160,3 +1160,16 @@ address { font-style: normal; }
 .msx-slots { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 14px; }
 .msx-slots .tab[aria-checked='true'] { border-image-source: url('/game/ui/plate-brown.png'); color: var(--gold-bright); }
 button.plate[disabled] { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+.msx-download h2 { color: var(--gold-bright); }
+.msx-cmd {
+  margin: 0 0 12px;
+  padding: 12px 14px;
+  overflow-x: auto;
+  font-size: 15px;
+  line-height: 1.5;
+  background: rgb(10 6 3 / 0.55);
+  border: 1px solid rgb(233 180 76 / 0.3);
+  color: var(--ink);
+}
+.msx-sha code { word-break: break-all; }

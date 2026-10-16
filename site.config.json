@@ -63,6 +63,7 @@
       "machine": "MSX2E",
       "presets": "OPL4,SCCI2",
       "format": "ASCII16"
-    }
+    },
+    "romDownloadName": "Avalon MSX.rom"
   }
 }

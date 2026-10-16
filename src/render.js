@@ -42,6 +42,9 @@ const renderers = {
     .map((s) => galleryItem({ full: `/game/msx/shots/${s.id}.png`, thumb: `/game/msx/shots/${s.id}.png`, caption: s.caption, w: 320, h: 240 }))
     .join('')}</ul>`,
 
+  /** SHA-256 of the published Avalon MSX ROM (written by import-assets, checked against the verified build). */
+  'msx-sha': (root) => esc(json(root, 'public/game/msx/manifest.json').rom_sha256),
+
   /** Avalon MSX gameplay clips, with their MoonSound audio; nothing loads until play is pressed. */
   'msx-videos': (root) => `<ul class="msx-videos">${json(root, 'public/game/msx/manifest.json').videos
     .map((v) => `<li><figure class="panel-dialogue msx-video">`
