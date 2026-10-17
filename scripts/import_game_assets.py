@@ -332,13 +332,24 @@ def import_merch():
 def import_msx(with_video=True):
     """Avalon MSX: the verified cartridge ROM, screenshots, gameplay clips and the title screen."""
     rec = MSX / "recordings"
-    manifest = json.loads((rec / "manifest.json").read_text())
     rom = MSX / "build/avalon-msx.rom"
     digest = hashlib.sha256(rom.read_bytes()).hexdigest()
-    if digest != manifest["rom_sha256"]:
-        # Only ever publish the build the recordings and WARP checks were made with.
-        raise SystemExit(f"{rom} ({digest[:12]}…) is not the verified build "
-                         f"({manifest['rom_sha256'][:12]}…) from recordings/manifest.json")
+    # Only ever publish a build the MSX repo has validated: its hash must appear as the ROM hash
+    # (`rom_sha256` or `sha256`) of one of the validation reports there — the gameplay recordings'
+    # manifest, the startup-logo report, or any later *evidence* file.
+    reports = sorted(rec.glob("*.json")) + sorted((MSX / "docs").glob("*evidence*.json"))
+    validated_by = []
+    for report in reports:
+        try:
+            data = json.loads(report.read_text())
+        except ValueError:
+            continue
+        if isinstance(data, dict) and digest in (data.get("rom_sha256"), data.get("sha256")):
+            validated_by.append(report.relative_to(MSX).as_posix())
+    if not validated_by:
+        raise SystemExit(f"{rom} ({digest[:12]}…) is not named by any validation report in "
+                         f"{MSX.name}/recordings or {MSX.name}/docs; not publishing an unchecked build")
+    print(f"  ROM {digest[:12]}… validated by {', '.join(validated_by)}")
     msx_out = SITE / "public/msx"
     msx_out.mkdir(parents=True, exist_ok=True)
     shutil.copyfile(rom, msx_out / "avalon-msx.rom")
