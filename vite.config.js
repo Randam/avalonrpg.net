@@ -20,12 +20,16 @@ const ICONS = {
   github: simpleIcons.siGithub,
   linkedin: simpleIcons.siLinkedin,
   play: { path: 'M7 4.5v15l12.5-7.5z' }, // a plain play triangle; simple-icons only has brands
+  // A DOS prompt: a screen with ">_" knocked out.
+  msx2: {},
+  dos: { path: 'M3 4h18a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1zM6 8.5l1.4-1.4 4.9 4.9-4.9 4.9L6 15.5l3.5-3.5zM13 14.5h5v2h-5z', rule: 'evenodd' },
 };
 
 function icon(name) {
   const i = ICONS[name];
   if (!i) throw new Error(`Unknown icon "${name}"`);
-  return `<svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="${i.path}"/></svg>`;
+  if (name === 'msx2') return '<span class="icon icon-msx2" aria-hidden="true"></span>'; // the MSX2 logo, tinted by CSS
+  return `<svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="${i.path}"${i.rule ? ` fill-rule="${i.rule}"` : ''}/></svg>`;
 }
 
 /** Store buttons, one per entry in site.config.json. A store without a URL yet renders as "Coming soon". */

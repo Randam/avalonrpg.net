@@ -1225,3 +1225,15 @@ button.plate[disabled] { opacity: 0.5; cursor: not-allowed; transform: none; }
   .msx-hw-row { grid-template-columns: 1fr; gap: 10px; }
   .msx-hw img { height: 36px; }
 }
+
+/* The MSX2 logo as a button icon: the SVG used as a mask, so it takes the text colour. */
+.icon-msx2,
+.plate .icon.icon-msx2 {
+  display: inline-block;
+  width: 66px;
+  height: 22px;
+  flex: none;
+  background: currentColor;
+  -webkit-mask: url('/game/msx/logos/msx2.svg') center / contain no-repeat;
+  mask: url('/game/msx/logos/msx2.svg') center / contain no-repeat;
+}
