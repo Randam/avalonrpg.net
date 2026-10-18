@@ -1202,3 +1202,26 @@ button.plate[disabled] { opacity: 0.5; cursor: not-allowed; transform: none; }
 .merch-card:hover .merch-art, .merch-card:focus-visible .merch-art { transform: translateY(-3px); outline-color: var(--gold-bright); }
 .merch-name { display: block; margin-top: 8px; text-align: center; font-weight: 700; }
 .merch-card:hover .merch-name { color: var(--gold-bright); }
+
+/* Avalon MSX: supported hardware logos (black artwork, so on a parchment panel). */
+.msx-hw {
+  background: #f6f1e4;
+  border: 3px solid var(--gold-deep);
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 4px;
+  padding: 22px clamp(16px, 3vw, 32px);
+  color: #2a1a0c;
+  filter: var(--shadow);
+}
+.msx-hw-row { display: grid; grid-template-columns: 110px 1fr; gap: 16px; align-items: center; }
+.msx-hw-row + .msx-hw-row { margin-top: 22px; padding-top: 20px; border-top: 1px solid rgb(122 90 42 / 0.3); }
+.msx-hw-label { font-size: 15px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: #7a5a2a; }
+.msx-hw ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: flex-end; gap: 18px 34px; }
+.msx-hw li { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.msx-hw img { display: block; height: 46px; width: auto; }
+.msx-hw li span { font-size: 13px; color: #6b5233; }
+@media (max-width: 640px) {
+  .msx-hw-row { grid-template-columns: 1fr; gap: 10px; }
+  .msx-hw img { height: 36px; }
+}
