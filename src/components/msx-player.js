@@ -4,8 +4,10 @@
  * its own auto-start listens for page-load events that have long passed by then.
  *
  * The cartridge is a 4 MB ASCII16-SRAM8 ROM, but WebMSX only gives SRAM to ASCII16 cartridges of up
- * to 2 MB, so it runs as plain ASCII16 and the game's own saves can't stick. The Save/Load buttons
- * use WebMSX savestates instead, which it keeps in this browser's IndexedDB.
+ * to 2 MB, so it runs as plain ASCII16. The game then falls back to saving on disk (A:AVALON.SAV):
+ * a formatted disk goes into drive A at start, every change to it is kept in this browser's
+ * IndexedDB, and the next visit puts it back, so the game's own Save/Load Game just works. The
+ * Save/Load buttons on the page add WebMSX savestates (the whole machine) on top.
  */
 export function initMsxPlayer() {
   const host = document.querySelector('[data-msx-player]');
@@ -55,7 +57,8 @@ export function initMsxPlayer() {
     say(`Loading slot ${slot}… (the MSX screen says if it is empty)`);
   });
 
-  startBtn?.addEventListener('click', () => {
+  startBtn?.addEventListener('click', async () => {
+    const savedDisk = await diskStore.get().catch(() => null);
     startBtn.disabled = true;
     startBtn.querySelector('.yt-play-label').textContent = 'Loading…';
     const script = document.createElement('script');
@@ -72,6 +75,7 @@ export function initMsxPlayer() {
       W.SCREEN_DEFAULT_SCALE = scaleFor(host.clientWidth);
       startBtn.remove();
       W.start();
+      keepDiskA(savedDisk);
       [saveBtn, loadBtn].forEach((b) => b && (b.disabled = false));
       say('Pick a slot, then Save or Load.');
       // Hand the keyboard to the emulator.
@@ -83,6 +87,65 @@ export function initMsxPlayer() {
     };
     document.head.appendChild(script);
   });
+}
+
+/** The disk in drive A, kept in IndexedDB so the game's own saves survive a reload. */
+const diskStore = (() => {
+  const open = () => new Promise((resolve, reject) => {
+    const req = indexedDB.open('avalon-msx', 1);
+    req.onupgradeneeded = () => req.result.createObjectStore('disks');
+    req.onsuccess = () => resolve(req.result);
+    req.onerror = () => reject(req.error);
+  });
+  const run = async (mode, fn) => {
+    const db = await open();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction('disks', mode);
+      const req = fn(tx.objectStore('disks'));
+      tx.oncomplete = () => resolve(req.result);
+      tx.onerror = () => reject(tx.error);
+    });
+  };
+  return {
+    get: () => run('readonly', (s) => s.get('A')),
+    put: (bytes) => run('readwrite', (s) => s.put(bytes, 'A')),
+  };
+})();
+
+/**
+ * Put a formatted disk in drive A once the emulator is up (with the stored contents, if any), then
+ * store it again whenever the game writes to it.
+ */
+function keepDiskA(saved) {
+  const drive = () => window.WMSX?.room?.machine?.getDiskDriveSocket?.()?.getDrive?.();
+  const current = () => { const d = drive(); return d?.getDriveStack(0)?.[d.getCurrentDiskNum(0)]; };
+  const fingerprint = (bytes) => { let h = 0; for (let i = 0; i < bytes.length; i += 1) h = (h * 31 + bytes[i]) | 0; return h; };
+  let last;
+  const boot = setInterval(() => {
+    const d = drive();
+    if (!d) return;
+    clearInterval(boot);
+    d.insertNewDisk(0);
+    const disk = current();
+    if (saved && disk?.content?.length === saved.length) {
+      disk.content.set(saved);
+      disk.name = 'Avalon saves.dsk';
+    }
+    last = disk && fingerprint(disk.content);
+    const store = () => {
+      const now = current();
+      if (!now?.content) return;
+      const f = fingerprint(now.content);
+      if (f !== last) {
+        last = f;
+        diskStore.put(new Uint8Array(now.content)).catch(() => {});
+      }
+    };
+    setInterval(store, 3000);
+    // And when the visitor leaves or switches away, so a save just before closing isn't lost.
+    addEventListener('pagehide', store);
+    document.addEventListener('visibilitychange', () => document.visibilityState === 'hidden' && store());
+  }, 200);
 }
 
 /** WebMSX sizes its screen by a scale factor (1.0 ≈ 544 px wide, with its border); fit the frame. */

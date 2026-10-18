@@ -334,21 +334,35 @@ def import_msx(with_video=True):
     rec = MSX / "recordings"
     rom = MSX / "build/avalon-msx.rom"
     digest = hashlib.sha256(rom.read_bytes()).hexdigest()
-    # Only ever publish a build the MSX repo has validated: its hash must appear as the ROM hash
-    # (`rom_sha256` or `sha256`) of one of the validation reports there — the gameplay recordings'
-    # manifest, the startup-logo report, or any later *evidence* file.
-    reports = sorted(rec.glob("*.json")) + sorted((MSX / "docs").glob("*evidence*.json"))
-    validated_by = []
-    for report in reports:
+    # Only ever publish a build the MSX repo has validated: some JSON report under recordings/ or
+    # docs/ must name its hash (as `rom_sha256` or `sha256`, at any depth), and none of the checks
+    # recorded against that hash may have failed.
+    validated_by, failed = [], []
+
+    def walk(node, report):
+        if isinstance(node, dict):
+            if digest in (node.get("rom_sha256"), node.get("sha256")):
+                validated_by.append(report)
+                for check in node.get("checks") or []:
+                    if isinstance(check, dict) and check.get("passed") is False:
+                        failed.append(f"{report}: {check.get('name')}")
+            for value in node.values():
+                walk(value, report)
+        elif isinstance(node, list):
+            for value in node:
+                walk(value, report)
+
+    for report in sorted([*rec.rglob("*.json"), *(MSX / "docs").rglob("*.json")]):
         try:
-            data = json.loads(report.read_text())
+            walk(json.loads(report.read_text()), report.relative_to(MSX).as_posix())
         except ValueError:
             continue
-        if isinstance(data, dict) and digest in (data.get("rom_sha256"), data.get("sha256")):
-            validated_by.append(report.relative_to(MSX).as_posix())
+    validated_by = sorted(set(validated_by))
     if not validated_by:
         raise SystemExit(f"{rom} ({digest[:12]}…) is not named by any validation report in "
                          f"{MSX.name}/recordings or {MSX.name}/docs; not publishing an unchecked build")
+    if failed:
+        raise SystemExit(f"{rom} ({digest[:12]}…) has failed checks: {', '.join(failed)}")
     print(f"  ROM {digest[:12]}… validated by {', '.join(validated_by)}")
     msx_out = SITE / "public/msx"
     msx_out.mkdir(parents=True, exist_ok=True)

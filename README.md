@@ -60,10 +60,13 @@ presents dialogue.
   captured from WebMSX).
 - **`/msx/play/`** runs the cartridge in [WebMSX](https://webmsx.org), loaded from jsDelivr pinned to
   a commit (`site.config.json` → `msx.webmsx`) and only after the visitor presses Start. WebMSX has
-  no SRAM for ASCII16 cartridges over 2 MB, so the 4 MB ROM runs as plain ASCII16 and the game's own
-  saves can't stick; the page's Save/Load buttons use WebMSX savestates in the browser's IndexedDB
-  instead. Music works on MoonSound (`OPL4` preset), MSX-MUSIC and SCC+ (`SCCI2`); WebMSX has no
-  MSX-AUDIO.
+  no SRAM for ASCII16 cartridges over 2 MB, so the 4 MB ROM runs as plain ASCII16 and the game falls
+  back to saving on disk: the page inserts a formatted disk in drive A, keeps it in IndexedDB
+  whenever it changes, and puts it back on the next visit, so the game's own Save/Load Game work
+  across visits. The page's Save/Load buttons add WebMSX savestates on top. Music works on MoonSound
+  (`OPL4` preset), MSX-MUSIC and SCC+ (`SCCI2`); WebMSX has no MSX-AUDIO. `import-assets` publishes
+  a ROM only if a validation report in the MSX repo (any JSON under `recordings/` or `docs/`) names
+  its SHA-256 and none of its checks failed.
 - **`public/classic/shrine/`** and **`src/data/guide/`**: the complete Avalon shrine that
   MiG Outpost wrote for RPGClassics (walkthrough, maps and area scans, weapons, defense, items,
   objects, enemies, cheats, music, downloads, savegames, thanks), migrated to `/original/guide/`.
