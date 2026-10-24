@@ -335,8 +335,9 @@ def import_msx(with_video=True):
     rom = MSX / "build/avalon-msx.rom"
     digest = hashlib.sha256(rom.read_bytes()).hexdigest()
     # Only ever publish a build the MSX repo has validated: some JSON report under recordings/ or
-    # docs/ must name its hash (as `rom_sha256` or `sha256`, at any depth), and none of the checks
-    # recorded against that hash may have failed.
+    # docs/ — or a frozen release in build/release-*/ whose provenance.json names it — must name its
+    # hash (as `rom_sha256` or `sha256`, at any depth), and none of the checks recorded against that
+    # hash may have failed. A frozen release's own verification reports are all checked.
     validated_by, failed = [], []
 
     def walk(node, report):
@@ -357,6 +358,30 @@ def import_msx(with_video=True):
             walk(json.loads(report.read_text()), report.relative_to(MSX).as_posix())
         except ValueError:
             continue
+
+    def failures(node, where):
+        if isinstance(node, dict):
+            if node.get("passed") is False:
+                failed.append(f"{where}: {node.get('name')}")
+            for value in node.values():
+                failures(value, where)
+        elif isinstance(node, list):
+            for value in node:
+                failures(value, where)
+
+    for provenance in sorted((MSX / "build").glob("release-*/provenance.json")):
+        try:
+            if json.loads(provenance.read_text()).get("rom_sha256") != digest:
+                continue
+        except ValueError:
+            continue
+        release = provenance.parent
+        validated_by.append(release.relative_to(MSX).as_posix() + "/")
+        for report in sorted(release.rglob("*.json")):
+            try:
+                failures(json.loads(report.read_text()), report.relative_to(MSX).as_posix())
+            except ValueError:
+                continue
     validated_by = sorted(set(validated_by))
     if not validated_by:
         raise SystemExit(f"{rom} ({digest[:12]}…) is not named by any validation report in "
