@@ -1,6 +1,10 @@
 /**
- * Google Analytics, only with consent. Nothing from Google is loaded until the visitor agrees;
- * the choice is remembered in localStorage and can be changed from the footer's "Cookie settings".
+ * Google Analytics with Consent Mode v2 ("advanced"). The tag loads on every visit, but starts with
+ * all consent denied: until the visitor agrees it sets no cookies and sends only cookieless pings,
+ * which Google uses to model the visits it can't count. "Sure, go ahead" grants analytics_storage
+ * (the normal, cookie-based measurement); the advertising signals stay denied for everyone, since
+ * this site runs no ads. The choice is remembered in localStorage and can be changed from the
+ * footer's "Cookie settings".
  */
 const KEY = 'avalon-consent';
 
@@ -11,14 +15,21 @@ function saveChoice(value) {
   try { localStorage.setItem(KEY, value); } catch { /* private mode: ask again next visit */ }
 }
 
-let loaded = false;
-function loadAnalytics(id) {
-  if (loaded || !id) return;
-  loaded = true;
+function gtag() { window.dataLayer.push(arguments); } // eslint-disable-line prefer-rest-params
+
+function loadAnalytics(id, granted) {
+  if (!id) return;
   window.dataLayer = window.dataLayer || [];
-  window.gtag = function gtag() { window.dataLayer.push(arguments); };
-  window.gtag('js', new Date());
-  window.gtag('config', id, { anonymize_ip: true });
+  window.gtag = gtag;
+  // Consent defaults must be set before the tag loads and before any config.
+  gtag('consent', 'default', {
+    analytics_storage: granted ? 'granted' : 'denied',
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+  });
+  gtag('js', new Date());
+  gtag('config', id);
   const s = document.createElement('script');
   s.async = true;
   s.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(id)}`;
@@ -39,11 +50,10 @@ function clearAnalyticsCookies() {
 
 export function initConsent(gaId) {
   const box = document.getElementById('consent');
-  if (!box) return;
-
   const choice = readChoice();
-  if (choice === 'granted') loadAnalytics(gaId);
-  else if (choice !== 'denied') box.hidden = false;
+  loadAnalytics(gaId, choice === 'granted');
+  if (!box) return;
+  if (choice !== 'granted' && choice !== 'denied') box.hidden = false;
 
   box.addEventListener('click', (e) => {
     const btn = e.target.closest('[data-consent]');
@@ -51,13 +61,8 @@ export function initConsent(gaId) {
     const value = btn.dataset.consent;
     saveChoice(value);
     box.hidden = true;
-    if (value === 'granted') {
-      loadAnalytics(gaId);
-    } else {
-      clearAnalyticsCookies();
-      // Analytics already running on this page stops on the next page load.
-      if (loaded) location.reload();
-    }
+    if (window.gtag) window.gtag('consent', 'update', { analytics_storage: value });
+    if (value === 'denied') clearAnalyticsCookies();
   });
 
   document.querySelectorAll('[data-consent-open]').forEach((b) => b.addEventListener('click', () => {

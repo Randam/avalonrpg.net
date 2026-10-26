@@ -102,5 +102,8 @@ Nothing references `static.avalonrpg.net` any more; that subdomain can be retire
 
 ## Privacy
 
-Google Analytics loads only after a visitor agrees (the choice is kept in `localStorage`, and
-the footer has "Cookie settings"). YouTube players are click-to-load from `youtube-nocookie.com`.
+Google Analytics runs in Consent Mode v2 (`src/components/consent.js`): it loads on every visit
+with all consent denied, so without a "yes" it sets no cookies and sends only cookieless pings that
+Google uses to model the uncounted visits; "Sure, go ahead" grants `analytics_storage`. Advertising
+signals stay denied for everyone. The choice is kept in `localStorage`, and the footer has
+"Cookie settings". YouTube players are click-to-load from `youtube-nocookie.com`.
