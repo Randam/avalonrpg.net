@@ -334,8 +334,8 @@ def import_msx(with_video=True):
     rec = MSX / "recordings"
     rom = MSX / "build/avalon-msx.rom"
     digest = hashlib.sha256(rom.read_bytes()).hexdigest()
-    # Only ever publish a build the MSX repo has validated: some JSON report under recordings/ or
-    # docs/ — or a frozen release in build/release-*/ whose provenance.json names it — must name its
+    # Only ever publish a build the MSX repo has validated: some JSON report under recordings/,
+    # docs/ or build/test/ — or a frozen release in build/release-*/ whose provenance.json names it — must name its
     # hash (as `rom_sha256` or `sha256`, at any depth), and none of the checks recorded against that
     # hash may have failed. A frozen release's own verification reports are all checked.
     validated_by, failed = [], []
@@ -353,7 +353,9 @@ def import_msx(with_video=True):
             for value in node:
                 walk(value, report)
 
-    for report in sorted([*rec.rglob("*.json"), *(MSX / "docs").rglob("*.json")]):
+    # build/test/ holds the openMSX test reports; each records the hash of the ROM it ran.
+    for report in sorted([*rec.rglob("*.json"), *(MSX / "docs").rglob("*.json"),
+                          *(MSX / "build/test").rglob("*.json")]):
         try:
             walk(json.loads(report.read_text()), report.relative_to(MSX).as_posix())
         except ValueError:
@@ -385,7 +387,7 @@ def import_msx(with_video=True):
     validated_by = sorted(set(validated_by))
     if not validated_by:
         raise SystemExit(f"{rom} ({digest[:12]}…) is not named by any validation report in "
-                         f"{MSX.name}/recordings or {MSX.name}/docs; not publishing an unchecked build")
+                         f"{MSX.name}/recordings, docs, build/test or build/release-*; not publishing an unchecked build")
     if failed:
         raise SystemExit(f"{rom} ({digest[:12]}…) has failed checks: {', '.join(failed)}")
     print(f"  ROM {digest[:12]}… validated by {', '.join(validated_by)}")
