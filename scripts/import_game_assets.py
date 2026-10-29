@@ -395,8 +395,19 @@ def import_msx(with_video=True):
     msx_out.mkdir(parents=True, exist_ok=True)
     shutil.copyfile(rom, msx_out / "avalon-msx.rom")
 
+    # The recordings predate the redrawn Mace portrait in the HUD; it is the only difference in
+    # the panel (one 48x40 block at 228,170 in openMSX's 320x240 raw screenshot), so it is swapped
+    # in wherever the old portrait is still there pixel for pixel. art/msx-mace-portrait-new.png
+    # is that block from an openMSX capture of the current ROM on the same machine. Screenshots
+    # recorded later already carry the new portrait and are left alone.
+    old_portrait = Image.open(SITE / "art/msx-mace-portrait-old.png").convert("RGB")
+    new_portrait = Image.open(SITE / "art/msx-mace-portrait-new.png").convert("RGB")
+    portrait_box = (228, 170, 276, 210)
     for shot_id, name, _ in MSX_SCREENSHOTS:
-        shutil.copyfile(rec / name, dest(f"msx/shots/{shot_id}.png"))
+        shot = Image.open(rec / name).convert("RGB")
+        if list(shot.crop(portrait_box).getdata()) == list(old_portrait.getdata()):
+            shot.paste(new_portrait, portrait_box[:2])
+        shot.save(dest(f"msx/shots/{shot_id}.png"), optimize=True)
     title = Image.open(SITE / "art/msx-title.png").convert("RGB")
     title.save(dest("msx/title.png"), optimize=True)
 
