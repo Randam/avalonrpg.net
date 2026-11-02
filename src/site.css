@@ -510,7 +510,7 @@ p:last-child { margin-bottom: 0; }
 /* Home: hero                                                                                   */
 /* ------------------------------------------------------------------------------------------ */
 
-/* Landscape key art (built from the approved movie-poster v2 by make_landscape_keyart.py) on
+/* Landscape key art (built from the approved movie-poster v4 by make_landscape_keyart.py) on
    wide screens, the approved portrait poster itself on phones. */
 .hero { position: relative; }
 .hero-art {

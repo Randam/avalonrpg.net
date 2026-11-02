@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 """Build the landscape (16:9) key art from the approved portrait box art.
 
-The approved key art is the movie-poster box art, v2 (`art/box-art/movie-poster-v2/box-art.psd`
-in the game repository), and it only exists in portrait. This rebuilds a 1930×1086 landscape
-version out of that PSD's own layers, adding no new artwork:
+The approved key art is the movie-poster box art, v4 (`art/box-art/movie-poster-v4/` in this
+repository: `box-art_v4.jpg` plus its layers exported as PNG), and it only exists in portrait. This
+rebuilds a 1930×1086 landscape version out of those layers, adding no new artwork:
 
 - the scene layers (sky, sea, the village and alien-village islands, the bridge) are cropped to
   16:9 height and widened by mirroring their outer 422px, so sky, sea, cliffs and coast carry on
   seamlessly and both islands close into whole islands;
-- the objects that mirroring would duplicate (the house, the hut, the palm, the alien, a few
-  plants and stones) are painted out with quilted grass and sand taken from the same islands;
+- the objects that mirroring would duplicate (the house, Fleur, the hut, the palm, the alien, a
+  few plants and stones) are painted out with quilted grass and sand taken from the same islands;
 - the logo and the character group (Fleur, Mace, Caddman, with their fade into the sea) are
   placed side by side over the sky: logo left, characters right, at the height they have on the
   poster.
@@ -17,24 +17,17 @@ version out of that PSD's own layers, adding no new artwork:
 Writes `art/keyart-landscape.png`; `import_game_assets.py` makes the web sizes from it. The
 random tiling is seeded, so a re-run gives the same image.
 
-Needs `psd-tools[composite]` (pip install 'psd-tools[composite]'), numpy and Pillow.
+Needs numpy and Pillow.
 """
-import os
 from pathlib import Path
 
 import numpy as np
 from PIL import Image, ImageFilter
-from psd_tools import PSDImage
 
 SITE = Path(__file__).resolve().parent.parent
-GAME = Path(os.environ.get("AVALON_REMAKE", SITE.parent / "Avalon-Remake")).resolve()
-PSD = GAME / "art/box-art/movie-poster-v2/box-art.psd"
-APPROVED = GAME / "art/box-art/movie-poster-v2/box-art_v2.jpg"
+BOX_ART = SITE / "art/box-art/movie-poster-v4"
+APPROVED = BOX_ART / "box-art_v4.jpg"
 OUT = SITE / "art/keyart-landscape.png"
-
-SCENE_LAYERS = {"Background", "Layer 7", "Curves 1"}
-CHARACTER_LAYERS = {"Group 1", "Layer 5", "Layer 10", "Layer 4 copy 2"}   # group mask included
-LOGO_LAYERS = {"Layer 9", "Layer 8"}                                      # "Avalon" + plaque
 
 TOP, H = 300, 1086           # the poster rows kept (16:9 at the poster's own scale)
 E = 422                      # width added on each side
@@ -67,7 +60,7 @@ def quilt(sources, w, h, tile=40, overlap=12):
     return (out / np.maximum(wsum, 1e-6))[:h, :w]
 
 
-def paint_out(ext, box, sources, keep_sea=False, feather=FEATHER):
+def paint_out(ext, box, sources, keep_sea=False, feather=FEATHER, match=False):
     """Cover ext[box] with quilted texture, blended in over a soft edge. With keep_sea, pixels
     that are sea in the original are left alone, so a patch near the coast can't push sand out
     into the water."""
@@ -77,6 +70,17 @@ def paint_out(ext, box, sources, keep_sea=False, feather=FEATHER):
     d = np.minimum.reduce([yy + 1, xx + 1, (y1 - y0) - yy, (x1 - x0) - xx]).astype(float)
     m = np.clip(d / feather, 0, 1)[..., None]
     region = ext[y0:y1, x0:x1].astype(float)
+    # With match, the fill's median colour is set to that of the ring of pixels around the patch,
+    # so the patch has no visible edge where the shading differs from where the texture came from.
+    ring = np.ones((y1 - y0, x1 - x0), bool)
+    ring[feather:-feather, feather:-feather] = False
+    border = region[ring]
+    if keep_sea:
+        r, g, b = border[:, 0], border[:, 1], border[:, 2]
+        border = border[~((b > r + 30) & (b > g + 10) & (g >= r))]
+    if match and len(border):
+        fill[..., :3] += np.median(border[:, :3], 0) - np.median(fill[..., :3].reshape(-1, 3), 0)
+        fill = np.clip(fill, 0, 255)
     if keep_sea:
         r, g, b = region[..., 0], region[..., 1], region[..., 2]
         land = ~((b > r + 30) & (b > g + 10) & (g >= r))
@@ -86,16 +90,31 @@ def paint_out(ext, box, sources, keep_sea=False, feather=FEATHER):
     ext[y0:y1, x0:x1] = (fill * m + region * (1 - m)).round().astype(np.uint8)
 
 
+def patch_from(ext, box, dx, feather=6):
+    """Cover ext[box] with the pixels dx to the side, blended in over a soft edge. For spots on
+    the cobbled path, where quilting would break up the stones."""
+    x0, y0, x1, y1 = box
+    yy, xx = np.mgrid[0:y1 - y0, 0:x1 - x0]
+    d = np.minimum.reduce([yy + 1, xx + 1, (y1 - y0) - yy, (x1 - x0) - xx]).astype(float)
+    m = np.clip(d / feather, 0, 1)[..., None]
+    region = ext[y0:y1, x0:x1].astype(float)
+    fill = ext[y0:y1, x0 + dx:x1 + dx].astype(float)
+    ext[y0:y1, x0:x1] = (fill * m + region * (1 - m)).round().astype(np.uint8)
+
+
 def crop(arr, box):
     x0, y0, x1, y1 = box
     return arr[y0:y1, x0:x1].astype(float)
 
 
 def main():
-    psd = PSDImage.open(PSD)
-    scene = psd.composite(layer_filter=lambda l: l.name in SCENE_LAYERS and l.visible)
-    chars = psd.composite(layer_filter=lambda l: l.name in CHARACTER_LAYERS and l.visible)
-    logo = psd.composite(layer_filter=lambda l: l.name in LOGO_LAYERS)
+    def layer(name):
+        return Image.open(BOX_ART / f"{name}.png").convert("RGBA")
+
+    scene = layer("background")
+    chars = layer("characters")
+    logo = layer("avalon")
+    logo.alpha_composite(layer("legacy-edition"))
 
     # Guard: scene + characters + logo must still add up to the approved poster.
     rebuilt = scene.convert("RGBA")
@@ -104,16 +123,22 @@ def main():
     diff = np.abs(np.asarray(rebuilt.convert("RGB"), int)
                   - np.asarray(Image.open(APPROVED).convert("RGB"), int)).mean()
     if diff > 3:
-        raise SystemExit(f"PSD layers no longer rebuild the approved poster (mean diff {diff:.1f})"
-                         " — the layer names above need updating.")
+        raise SystemExit(f"The layers no longer rebuild the approved poster (mean diff {diff:.1f}).")
 
     a = np.asarray(scene.convert("RGBA").crop((0, TOP, 1086, TOP + H))).copy()
     left = a[:, :E][:, ::-1].copy()      # canvas x 0..E       ↔ poster x E-1..0
     right = a[:, -E:][:, ::-1].copy()    # canvas x E+1086..W  ↔ poster x 1085..1086-E
 
-    # Left: the mirrored house → grass (from below the path, and beside the house).
-    grass = [crop(a, (5, y(1152), 200, y(1225))), crop(a, (335, y(960), 390, y(1085)))]
-    paint_out(left, (E - 345, y(884), E - 55, y(1095)), grass)
+    # Left: the mirrored house → grass (from beside the house, the same smooth meadow).
+    grass = [crop(a, (335, y(960), 390, y(1085)))]
+    # Two passes: the first leaves the sea at the top-left corner alone, the second covers the
+    # window and dark walls that the first one takes for sea.
+    paint_out(left, (E - 345, y(884), E - 55, y(1102)), grass, keep_sea=True, feather=16)
+    paint_out(left, (E - 345, y(935), E - 55, y(1102)), grass, feather=16)
+    # The mirrored Fleur, sitting on the edge of the path: grass above it, and the path beside her
+    # below (the tree trunk is in the source above row 1094).
+    paint_out(left, (E - 126, y(1070), E - 72, y(1100)), grass, feather=4)
+    patch_from(left, (E - 126, y(1096), E - 72, y(1120)), 60)
 
     # Right: the mirrored hut and its stepping stones, palm, a green stone, the alien and two
     # plants → sand. Boxes are in poster coordinates; ext index = 1085 - poster x.
@@ -132,7 +157,7 @@ def main():
             continue
         ox0 = max(ox0, 1086 - E)
         paint_out(right, (1085 - (ox1 - 1), y(oy0), 1085 - ox0 + 1, y(oy1)), sand,
-                  keep_sea=True, feather=6)
+                  keep_sea=True, feather=14, match=True)
 
     out = Image.fromarray(np.concatenate([left, a, right], axis=1))
 
