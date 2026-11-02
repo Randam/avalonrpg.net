@@ -80,11 +80,12 @@ MACE_EMOTIONS = ["mace_talk01", "mace_smile", "mace_proud", "mace_thinking", "ma
 ITEM_ICONS = ["relic_disc", "swiss_watch", "map", "translator", "golden_key",
               "pick_axe", "torch", "necklace", "first_aid_kit", "master_key"]
 
-# The approved key art: the "movie poster" box art, v2. It only exists in portrait, and is shown
-# as-is — never cropped; wide spaces use the landscape adaptation below.
-POSTER = ART / "box-art/movie-poster-v2/box-art_v2.jpg"
-# Its landscape adaptation, built from the same PSD's layers by make_landscape_keyart.py (kept in
-# this repo, since it is the site's derivative, not a game asset).
+# The approved key art: the "movie poster" box art, v4, kept in this repo with its layers
+# (art/box-art/movie-poster-v4). It only exists in portrait, and is shown as-is — never cropped;
+# wide spaces use the landscape adaptation below.
+BOX_ART = SITE / "art/box-art/movie-poster-v4"
+POSTER = BOX_ART / "box-art_v4.jpg"
+# Its landscape adaptation, built from the same layers by make_landscape_keyart.py.
 LANDSCAPE = SITE / "art/keyart-landscape.png"
 
 # Painted art: (source, output stem, widths). The first width is the default src.
@@ -247,7 +248,7 @@ def import_painted():
     shutil.copyfile(POSTER, dest("press/avalon-legacy-edition-key-art.jpg"))
     Image.open(LANDSCAPE).convert("RGB").save(dest("press/avalon-legacy-edition-key-art-landscape.jpg"),
                                               quality=92, optimize=True)
-    shutil.copyfile(POSTER.parent / "box-art-characters-trans.png", dest("press/avalon-characters-transparent.png"))
+    shutil.copyfile(BOX_ART / "characters.png", dest("press/avalon-characters-transparent.png"))
 
 
 def import_portraits():

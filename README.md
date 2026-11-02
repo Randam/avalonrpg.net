@@ -36,18 +36,18 @@ presents dialogue.
 
 - **`public/game/`**: generated, don't edit by hand. `scripts/import_game_assets.py` copies it
   from a sibling checkout of the game (`../Avalon-Remake`, or set `AVALON_REMAKE`): UI slices,
-  fonts, the approved key art (the portrait box art in `art/box-art/movie-poster-v2`, always shown
-  whole, never cropped), the curated screenshots (with captions, spoiler-free) plus battle stills pulled
+  fonts, the approved key art (the portrait box art in this repo's `art/box-art/movie-poster-v4`,
+  always shown whole, never cropped), the curated screenshots (with captions, spoiler-free) plus battle stills pulled
   from the gameplay recordings, character portraits, item icons, the gameplay montage and the
   "chase" loop. It re-encodes to WebP/MP4/WebM at the sizes the site shows them. Needs Pillow,
   `cwebp` and `ffmpeg`.
 - **`art/keyart-landscape.png`**: the landscape (16:9) version of the approved box art, which
-  only exists in portrait. `scripts/make_landscape_keyart.py` builds it from the PSD's own layers
-  (`art/box-art/movie-poster-v2/box-art.psd` in the game repo): the scene is widened by mirroring
+  only exists in portrait. `scripts/make_landscape_keyart.py` builds it from the poster's own layers
+  (the PNGs next to `box-art_v4.jpg` in `art/box-art/movie-poster-v4/`): the scene is widened by mirroring
   its edges, the objects that would appear twice are painted out with grass and sand from the same
   islands, and the logo and characters are placed side by side. It adds no new artwork, checks
   that the layers still rebuild the approved poster, and is seeded, so re-runs give the same image.
-  Needs `pip install 'psd-tools[composite]'`. Re-run it (then `import-assets`) if the poster changes.
+  Needs numpy and Pillow. Re-run it (then `import-assets`) if the poster changes.
   The site shows this on wide screens and the approved portrait itself on phones.
 - **`public/classic/`**: the old site's media, mirrored from avalonrpg.net and
   static.avalonrpg.net: the 1998 screenshots, the full MP3 soundtrack and remixes, the DOS
