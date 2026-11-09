@@ -22,8 +22,9 @@
       "id": "steam",
       "icon": "steam",
       "store": "Steam",
-      "label": "Wishlist on Steam",
+      "label": "Buy on Steam",
       "platforms": "Windows · macOS · Linux",
+      "released": "2026-11-09",
       "url": "https://store.steampowered.com/app/5238290/Avalon_Legacy_Edition/",
       "primary": true
     },

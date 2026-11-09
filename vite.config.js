@@ -32,9 +32,10 @@ function icon(name) {
   return `<svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="${i.path}"${i.rule ? ` fill-rule="${i.rule}"` : ''}/></svg>`;
 }
 
-/** Store buttons, one per entry in site.config.json. A store without a URL yet renders as "Coming soon". */
+/** Store buttons, one per entry in site.config.json. A store without a URL yet renders as "Coming soon".
+ *  The primary store (Steam) is left out: it has its own wide button, `@buy`, above the list. */
 function stores(variant, cfg) {
-  const items = cfg.stores.map((s) => {
+  const items = cfg.stores.filter((s) => !s.primary).map((s) => {
     const body = `${icon(s.icon)}<span class="store-btn-text"><span class="store-btn-label">${s.label}</span>`
       + `<span class="store-btn-sub">${s.url ? s.platforms : 'Coming soon'}</span></span>`;
     const cls = `store-btn plate ${s.primary ? 'plate-primary' : ''} ${s.url ? '' : 'is-soon'}`.replace(/\s+/g, ' ').trim();
@@ -45,12 +46,20 @@ function stores(variant, cfg) {
   return `<ul class="store-list store-list-${variant}" aria-label="Where to get Avalon: Legacy Edition">${items.join('')}</ul>`;
 }
 
+/** The primary store as one wide button: the first thing to do wherever the game is offered. */
+function buy(place, cfg) {
+  const s = cfg.stores.find((x) => x.primary);
+  return `<a class="store-btn plate plate-primary buy-btn" href="${s.url}" target="_blank" rel="noopener" data-store="${s.id}">`
+    + `${icon(s.icon)}<span class="store-btn-text"><span class="store-btn-label">Out now · ${s.label}</span>`
+    + `<span class="store-btn-sub">${s.platforms}</span></span></a>`;
+}
+
 /** The browser demo (play.avalonrpg.net), shaped like a store button. `place` names the spot in the
  *  link (utm_campaign=site-<place>), so the demo's analytics can tell which button was used. */
 function playDemo(place, cfg) {
   const d = cfg.webDemo;
   const url = `${d.url}?utm_source=avalonrpg&utm_campaign=site-${place || 'button'}`;
-  return `<a class="store-btn plate plate-primary play-demo-btn" href="${url}" target="_blank" rel="noopener" data-store="web-demo">`
+  return `<a class="store-btn plate play-demo-btn" href="${url}" target="_blank" rel="noopener" data-store="web-demo">`
     + `${icon('play')}<span class="store-btn-text"><span class="store-btn-label">${d.label}</span>`
     + `<span class="store-btn-sub">${d.sub}</span></span></a>`;
 }
@@ -80,6 +89,7 @@ function siteTemplate() {
         let out = include(include(html));
         out = out.replace(/<!--\s*@render\s+([\w-]+)\s*-->/g, (_, name) => render(name, root));
         out = out.replace(/<!--\s*@soundtrack\s*-->/g, () => soundtrack(cfg));
+        out = out.replace(/<!--\s*@buy\s*([\w-]*)\s*-->/g, (_, place) => buy(place, cfg));
         out = out.replace(/<!--\s*@playdemo\s*([\w-]*)\s*-->/g, (_, place) => playDemo(place, cfg));
         out = out.replace(/<!--\s*@stores\s*([\w-]*)\s*-->/g, (_, v) => stores(v || 'full', cfg));
         out = out.replace(/\{\{\s*icon:([\w-]+)\s*\}\}/g, (_, n) => icon(n));
