@@ -19,6 +19,21 @@ function galleryItem({ full, thumb, caption, w, h }) {
     + `<span class="gallery-caption">${esc(caption)}</span></button></li>`;
 }
 
+/**
+ * The newest entry of the Avalon MSX changelog, which must describe the ROM that is actually published:
+ * a new ROM can't go live without its version number and changes.
+ */
+function msxRelease(root) {
+  const [latest] = json(root, 'src/data/msx-changelog.json');
+  const rom = json(root, 'public/game/msx/manifest.json').rom_sha256;
+  if (latest.sha256 !== rom) {
+    throw new Error(`src/data/msx-changelog.json has no entry for the published ROM ${rom.slice(0, 12)}…: add one at the top`);
+  }
+  return latest;
+}
+
+const longDate = (iso) => new Date(`${iso}T12:00:00Z`).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+
 const renderers = {
   /** Every curated Legacy Edition screenshot. */
   'gallery-legacy': (root) => `<ul class="gallery" data-gallery>${legacyShots(root).map((s) => galleryItem({
@@ -57,6 +72,21 @@ const renderers = {
 
   /** SHA-256 of the published Avalon MSX ROM (written by import-assets, checked against the verified build). */
   'msx-sha': (root) => esc(json(root, 'public/game/msx/manifest.json').rom_sha256),
+
+  /** Version number of the published Avalon MSX ROM: the newest changelog entry. */
+  'msx-version': (root) => esc(msxRelease(root).version),
+
+  /** Release date of the published Avalon MSX ROM. */
+  'msx-date': (root) => esc(longDate(msxRelease(root).date)),
+
+  /** Every Avalon MSX release, newest first: version, date, what changed and the ROM's SHA-256. */
+  'msx-changelog': (root) => {
+    msxRelease(root);
+    return `<ol class="changelog">${json(root, 'src/data/msx-changelog.json').map((r) => `<li class="panel-rune" id="v${esc(r.version)}">`
+      + `<h2>Version ${esc(r.version)}</h2><p class="changelog-meta"><time datetime="${esc(r.date)}">${esc(longDate(r.date))}</time></p>`
+      + `<ul>${r.changes.map((c) => `<li>${esc(c)}</li>`).join('')}</ul>`
+      + `<p class="small muted msx-sha">SHA-256: <code>${esc(r.sha256)}</code></p></li>`).join('')}</ol>`;
+  },
 
   /** Avalon MSX gameplay clips, with their MoonSound audio; nothing loads until play is pressed. */
   'msx-videos': (root) => `<ul class="msx-videos">${json(root, 'public/game/msx/manifest.json').videos

@@ -1,0 +1,136 @@
+[
+  {
+    "version": "1.8",
+    "date": "2026-11-11",
+    "sha256": "235cd1620f53dc73a13a4804318afbbffa048789d78628f5135f8bd0008f6141",
+    "changes": [
+      "Conversations flow better: if the next part of a conversation fits below the text already on screen, it appears there instead of on a fresh panel.",
+      "The weapon and armour shops show both lists at the top. Press Left or Right to switch between Weapons and Armour.",
+      "Every piece of equipment in a shop shows its status: EQUIPPED, UPGRADE, NO UPGRADE (yours is as good or better) or NEED GOLD. Choosing one you can't buy tells you why."
+    ]
+  },
+  {
+    "version": "1.7",
+    "date": "2026-11-02",
+    "sha256": "16f5567961461336a42a9fffadf2803781b942d6b945ba5b467ebb7ffabb0265",
+    "changes": [
+      "Shop lists have OWNED and PRICE columns, so you can see how many of an item you already carry. The count also shows while you buy, and updates right after a purchase."
+    ]
+  },
+  {
+    "version": "1.6",
+    "date": "2026-11-01",
+    "sha256": "9244596959875633e9d7781ab7f879324e40a33bcab670267420f7eb3957b2fa",
+    "changes": [
+      "Continue after Game Over: retry a lost battle from exactly where it started, with the items you used back in your bag and Mace taking the first turn. Or choose Back to title."
+    ]
+  },
+  {
+    "version": "1.5.2",
+    "date": "2026-10-30",
+    "sha256": "ef021944c827695a3579543fdafe78673dccd3fc6f99c5cd870e2d54b5fda0e5",
+    "changes": [
+      "A new game shows the first chapter card before the village appears, with its chapter music.",
+      "Changing scenes (areas, battles, chapter cards) no longer flashes the old picture in the new scene's colours."
+    ]
+  },
+  {
+    "version": "1.5.1",
+    "date": "2026-10-29",
+    "sha256": "09f1fd539606d8869d2f375013bd292630f5215afe9b4da1658d1e7b5f229691",
+    "changes": [
+      "Title screen: the light rays behind the logo are gone, leaving the golden logo over a glowing sun."
+    ]
+  },
+  {
+    "version": "1.5",
+    "date": "2026-10-29",
+    "sha256": "b3e7f1420384ab0b807c3c94d1be9517b4cc1d9e515c0c31baa869d083f6b35f",
+    "changes": [
+      "A new title screen: the redrawn Avalon logo in gold, fading in from black, with the title music.",
+      "All menus use the same compact font as the status panel."
+    ]
+  },
+  {
+    "version": "1.4.1",
+    "date": "2026-10-28",
+    "sha256": "efc2f2174d9001a6f89069853b76e5afd0d3cb994e60264f96784b949209b70a",
+    "changes": [
+      "Shops show your gold in the corner of the panel, and the new amount right after a purchase."
+    ]
+  },
+  {
+    "version": "1.4",
+    "date": "2026-10-28",
+    "sha256": "ae004b8e7738b58d733a87a5a8cc1327c6d4b95285b412aa047d1797ac819cf9",
+    "changes": [
+      "New intro artwork: the village panorama from Avalon: Legacy Edition and a newly drawn Mace.",
+      "The redrawn Mace portrait in the status, dialogue and battle panels."
+    ]
+  },
+  {
+    "version": "1.3.2",
+    "date": "2026-10-25",
+    "sha256": "f18e324eecef2da1311806019e0045ad20abbfa84c9c3c01926a5a584838b934",
+    "changes": [
+      "The music choice under Options on the title screen is steadier: moving through the list no longer redraws it, and cancelling keeps the current sound card."
+    ]
+  },
+  {
+    "version": "1.3.1",
+    "date": "2026-10-24",
+    "sha256": "209abe45946d2c02cfb991b72862c6d32dc18e28c341f82d82ba56f0b4576b99",
+    "changes": [
+      "Smoother menus: moving the cursor in the save, load and other menus only redraws the cursor, not the whole menu."
+    ]
+  },
+  {
+    "version": "1.3",
+    "date": "2026-10-24",
+    "sha256": "bccb36eceb069d5e8a8aa52b7ab4daaa92551303d7b3becdacd3b249295eda05",
+    "changes": [
+      "Runs on ASCII16-X flash cartridges, and saves all five slots and the settings in the cartridge's own flash memory (ON-CARTRIDGE FLASH). No FM-PAC or disk needed.",
+      "Emulators and loaders recognise the cartridge as ASCII16 automatically.",
+      "Fixed the White Tower console and its font.",
+      "Safer hardware detection at startup, for MSX-MUSIC, FM-PAC and SCC on expanded slots."
+    ]
+  },
+  {
+    "version": "1.2.1",
+    "date": "2026-10-19",
+    "sha256": "bf2798ed3ade7558a56b91b2ab20b884cc86066a38d61b1734a7c2e693bff622",
+    "changes": [
+      "Fixed saving to an FM-PAC.",
+      "Fixes from testing on real MSX machines: the title screen border stays black, and Load Game shows SAVED or EMPTY for all five slots.",
+      "No more hanging notes while saving, loading or entering a new area."
+    ]
+  },
+  {
+    "version": "1.2",
+    "date": "2026-10-18",
+    "sha256": "f2ca0866626b2727c6dafc954395a55582cba9cf7ff4d561f4be2e7592c1acc9",
+    "changes": [
+      "More ways to save: choose cartridge SRAM, an FM-PAC or a disk in drive A, then one of five slots. Your Options are saved too.",
+      "Choose the music under Options: MoonSound, MSX-MUSIC, MSX-AUDIO, both together in stereo, SCC+ or off. Only the sound cards you have are offered.",
+      "Drums play in stereo on MSX-MUSIC and MSX-AUDIO together, and several songs were improved.",
+      "An improved title screen."
+    ]
+  },
+  {
+    "version": "1.1",
+    "date": "2026-10-17",
+    "sha256": "e7be0ed11161fa9ff41b581a36dff5ee7382d51c61d14f543a869ede2871c267",
+    "changes": [
+      "Startup logos: the original MiG logo and the Seven Mages logo, each with its own PSG sound. Press a key to skip them.",
+      "The battle selection grid lines up with the status box below it."
+    ]
+  },
+  {
+    "version": "1.0",
+    "date": "2026-10-16",
+    "sha256": "b45a9031ab5881314dd8c3cc9caf8635b465359ec6cc0df09e2faf8ed5ec265b",
+    "changes": [
+      "First release of Avalon MSX."
+    ]
+  }
+]

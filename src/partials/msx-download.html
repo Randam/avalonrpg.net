@@ -1,7 +1,8 @@
 <div class="panel-rune msx-download" id="download">
   <h2>Download the cartridge</h2>
   <p>For a real MSX2 with a flash cartridge, or an emulator like openMSX. The game saves to the cartridge's SRAM or flash, an FM-PAC or a disk.</p>
-  <a class="plate plate-primary" href="{{msx.rom}}" download="{{msx.romDownloadName}}" data-store="msx-rom">⬇ Download Avalon MSX ROM (4 MB)</a>
+  <a class="plate plate-primary" href="{{msx.rom}}" download="Avalon MSX <!-- @render msx-version -->.rom" data-store="msx-rom">⬇ Download Avalon MSX ROM (4 MB)</a>
+  <p class="small msx-version">Version <!-- @render msx-version --> · <!-- @render msx-date --> · <a href="/msx/changelog/">What's new</a></p>
   <dl class="msx-keys" style="margin-top: 18px">
     <dt>Cartridge</dt><dd>4 MB ROM. Mapper ASCII16-SRAM8 (8 KB battery-backed SRAM) or ASCII16-X (saves in the cartridge's flash); runs as plain ASCII16 too</dd>
     <dt>Machine</dt><dd>MSX2, 64 KB RAM, 128 KB VRAM</dd>
@@ -10,6 +11,6 @@
   <p class="small muted" style="margin-bottom: 6px">In openMSX:</p>
   <pre class="msx-cmd"><code>openmsx -machine Philips_NMS_8250 \
   -ext Moonsound -ext scc+ \
-  -cart "Avalon MSX.rom" -romtype ASCII16SRAM8</code></pre>
+  -cart "Avalon MSX <!-- @render msx-version -->.rom" -romtype ASCII16SRAM8</code></pre>
   <p class="small muted msx-sha">SHA-256: <code><!-- @render msx-sha --></code></p>
 </div>

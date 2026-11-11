@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- @include head -->
+  <title>Avalon MSX changelog</title>
+  <meta name="description" content="What changed in each version of the Avalon MSX cartridge ROM, with its release date and SHA-256." />
+  <link rel="canonical" href="{{siteUrl}}/msx/changelog/" />
+  <meta property="og:title" content="Avalon MSX changelog" />
+  <meta property="og:url" content="{{siteUrl}}/msx/changelog/" />
+  <meta property="og:image" content="{{siteUrl}}/game/msx/title.png" />
+</head>
+<body data-page="msx">
+  <!-- @include header -->
+  <main id="main">
+    <div class="container page-hero">
+      <span class="eyebrow">Avalon MSX · cartridge ROM</span>
+      <h1>Changelog</h1>
+      <p class="lead">What changed in each version of the Avalon MSX ROM. The current version is <!-- @render msx-version -->. Compare a ROM's SHA-256 with the one below to see which version you have.</p>
+    </div>
+
+    <section class="section-tight">
+      <div class="container">
+        <!-- @render msx-changelog -->
+        <p class="center" style="margin-top: 28px"><a class="plate plate-primary" href="/msx/#download">⬇ Download the latest version</a> <a class="plate" href="/msx/">Back to Avalon MSX</a></p>
+      </div>
+    </section>
+  </main>
+  <!-- @include footer -->
+</body>
+</html>
