@@ -1,5 +1,13 @@
 [
   {
+    "version": "1.8.1",
+    "date": "2026-11-11",
+    "sha256": "7147538e9e125765663ace4e333dbe8d72fb7f80c5e888cab64623d25e0d5b26",
+    "changes": [
+      "The silver chest in the forest tells you why it won't open: you still need the Silver Key, or you have already opened it."
+    ]
+  },
+  {
     "version": "1.8",
     "date": "2026-11-11",
     "sha256": "235cd1620f53dc73a13a4804318afbbffa048789d78628f5135f8bd0008f6141",
