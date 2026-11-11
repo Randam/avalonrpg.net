@@ -32,9 +32,10 @@
       "id": "epic",
       "icon": "epicgames",
       "store": "Epic Games Store",
-      "label": "Free demo on Epic",
-      "platforms": "Epic Games Store",
-      "url": "https://store.epicgames.com/p/avalon-legacy-edition-avalon-legacy-edition-demo-ea918e"
+      "label": "Buy on Epic",
+      "platforms": "Windows · macOS",
+      "url": "https://store.epicgames.com/p/avalon-legacy-edition-52ceab",
+      "released": "2026-11-09"
     },
     {
       "id": "googleplay",
