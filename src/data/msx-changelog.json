@@ -1,5 +1,13 @@
 [
   {
+    "version": "1.10",
+    "date": "2026-11-14",
+    "sha256": "ffa23d0a6185c82921ac491a8f7ea0b2ce63d583bdf6cd89fdb9d2af76fbe67e",
+    "changes": [
+      "Smoother scrolling: when you start walking, the screen scrolls in half-tile steps. After five tiles in the same direction it speeds up to whole tiles. Stopping, turning or bumping into something starts slow again. Dark caves and scripted camera moves still scroll a whole tile at a time."
+    ]
+  },
+  {
     "version": "1.9",
     "date": "2026-11-11",
     "sha256": "30564c7caa0e78ab1e67ad7ac7b89c775fb0e94d5dc1940e672fe77b7b47f917",
